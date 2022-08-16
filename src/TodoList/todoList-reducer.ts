@@ -6,7 +6,7 @@ const initialState: TodoListType[] = []
 export const todoListReducer = (state = initialState, action: todoListActionType): TodoListType[] => {
     switch (action.type) {
         case 'SET-TODO-LISTS':
-            return action.todoLists.map(t => t)
+            return [...action.todoLists]
         case 'ADD-TODO-LIST':
             return [{...action.todoList}, ...state,]
         case 'REMOVE-TODO-LIST':
@@ -27,9 +27,6 @@ export const fetchTodoLists = (): AppThunk => dispatch => {
     todoListAPI.getTodoLists()
         .then(res => {
             dispatch(setTodoLists(res.data))
-        })
-        .catch(e => {
-
         })
 }
 

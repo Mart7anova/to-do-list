@@ -90,7 +90,7 @@ export type TaskType = {
 }
 
 export type ResponseTasksType = {
-    item: TaskType[]
+    items: TaskType[]
     totalCount: number
     error: string | null
 }

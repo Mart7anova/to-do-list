@@ -11,7 +11,7 @@ beforeEach(() => {
 })
 
 test('Todo lists should be displayed', () => {
-    const endState = todoListReducer(startState, setTodoLists(startState))
+    const endState = todoListReducer([], setTodoLists(startState))
 
     expect(endState.length).toBe(2)
 })
