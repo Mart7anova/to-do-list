@@ -1,18 +1,18 @@
 import React, {useEffect} from 'react';
-import {fetchTodolists} from './todolist-reducer';
+import {fetchTodoLists} from './todoList-reducer';
 import {useAppDispatch, useAppSelector} from '../App/hooks';
 
-export const Todolist = () => {
-    const todolist = useAppSelector(state => state.todolist)
+export const TodoList = () => {
+    const todoList = useAppSelector(state => state.todoList)
     const dispatch = useAppDispatch()
 
     useEffect(()=>{
-        dispatch(fetchTodolists())
+        dispatch(fetchTodoLists())
     },[])
 
     return (
         <div>
-            {todolist.map(t=><div key={t.id}>
+            {todoList.map(t=><div key={t.id}>
                 {t.title}
             </div>)}
         </div>
