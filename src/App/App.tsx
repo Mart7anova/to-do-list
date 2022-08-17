@@ -1,3 +1,4 @@
+import Container from '@material-ui/core/Container';
 import React from 'react';
 import {TodoLists} from './TodoLists';
 
@@ -5,7 +6,9 @@ function App() {
 
     return (
         <div className="App">
-            <TodoLists/>
+            <Container fixed>
+                <TodoLists/>
+            </Container>
         </div>
     );
 }

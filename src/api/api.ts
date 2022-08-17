@@ -77,16 +77,16 @@ export type TodoListType = {
 }
 
 export type TaskType = {
-    description: string
+    id: string
+    todoListId: string
     title: string
     status: TaskStatuses
     priority: TaskPriorities
+    description: string
+    addedDate: string
     startDate: string
     deadline: string
-    id: string
-    todoListId: string
     order: number
-    addedDate: string
 }
 
 export type ResponseTasksType = {
