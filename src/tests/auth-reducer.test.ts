@@ -1,10 +1,10 @@
-import {authReducer, initialStateType, setIsLoggedIn} from '../reducers/auth-reducer';
+import {authReducer, initialAuthStateType, setIsLoggedIn} from '../reducers/auth-reducer';
 
 const startState = {
     isLoggedIn: false
-} as initialStateType
+} as initialAuthStateType
 
-test('The state of the isLoggedIn should change', () => {
+test('Authentication must be completed', () => {
     const endState = authReducer(startState, setIsLoggedIn(true))
 
     expect(endState.isLoggedIn).toBe(true)

@@ -2,10 +2,11 @@ import {AppThunk} from '../App/store';
 import {authAPI, LoginParamsType} from '../api/api';
 
 const initialState = {
+    //Аутентификация пользователя
     isLoggedIn: false
 }
 
-export const authReducer = (state: initialStateType = initialState, action: AuthActionType): initialStateType => {
+export const authReducer = (state: initialAuthStateType = initialState, action: AuthActionType): initialAuthStateType => {
     switch (action.type){
         case 'SET-IS-LOGGED-IN':
             return {...state, isLoggedIn: action.value}
@@ -37,5 +38,5 @@ export const logout = (): AppThunk => dispatch =>{
 //types
 export type AuthActionType = ReturnType<typeof setIsLoggedIn>
 
-export type initialStateType = typeof initialState
+export type initialAuthStateType = typeof initialState
 
