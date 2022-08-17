@@ -1,5 +1,5 @@
 import {todoListAPI, TodoListType} from '../api/api';
-import {AppThunk} from '../App/store';
+import {AppThunk} from '../store/store';
 
 const initialState: TodoListType[] = []
 

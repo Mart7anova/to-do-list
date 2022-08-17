@@ -1,5 +1,5 @@
 import {taskAPI, TaskPriorities, TaskStatuses, TaskType, UpdateTaskModelType} from '../api/api';
-import {AppThunk, RootStateType} from '../App/store';
+import {AppThunk, RootStateType} from '../store/store';
 import {setTodoLists} from './todoList-reducer';
 
 const initialState: TasksStateType = {}

@@ -1,10 +1,11 @@
 import React from 'react';
-import {TodoList} from '../TodoList/TodoList';
+import {TodoLists} from './TodoLists';
 
 function App() {
+
     return (
         <div className="App">
-            <TodoList/>
+            <TodoLists/>
         </div>
     );
 }

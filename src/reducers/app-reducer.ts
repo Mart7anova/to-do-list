@@ -1,4 +1,4 @@
-import {AppThunk} from '../App/store';
+import {AppThunk} from '../store/store';
 import {authAPI} from '../api/api';
 
 const initialState: initialAppStateType = {

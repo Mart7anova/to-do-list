@@ -1,22 +1,20 @@
 import React, {useEffect} from 'react';
 import {fetchTodoLists} from '../reducers/todoList-reducer';
-import {useAppDispatch, useAppSelector} from '../App/hooks';
-import {Task} from './Task/Task';
+import {useAppDispatch, useAppSelector} from '../hooks/hooks';
+import {TodoList} from './TodoList';
 
-export const TodoList = () => {
+
+export const TodoLists = () => {
     const todoLists = useAppSelector(state => state.todoList)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(fetchTodoLists())
-    }, [])
+    }, [dispatch])
 
     return (
         <div>
-            {todoLists.map(t => <div key={t.id}>
-                <h1>{t.title}</h1>
-                <Task key={t.id} todoListId={t.id}/>
-            </div>)}
+            {todoLists.map(t => <TodoList key={t.id} todoList={t}/>)}
         </div>
     );
 };
