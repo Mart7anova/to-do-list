@@ -1,5 +1,5 @@
 import {TodoListType} from '../api/api';
-import {addTodoList, changeTodoList, removeTodoList, setTodoLists, todoListReducer} from '../TodoList/todoList-reducer';
+import {addTodoList, changeTodoList, removeTodoList, setTodoLists, todoListReducer} from '../reducers/todoList-reducer';
 
 let startState: TodoListType[] = []
 

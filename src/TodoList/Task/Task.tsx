@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../App/hooks';
-import {fetchTasks} from './task-reducer';
+import {fetchTasks} from '../../reducers/task-reducer';
 
 type PropsType = {
     todoListId: string

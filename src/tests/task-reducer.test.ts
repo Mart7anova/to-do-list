@@ -1,5 +1,5 @@
 import {TaskPriorities, TaskStatuses, TaskType} from '../api/api';
-import {addTask, changeTask, removeTask, setTasks, taskReducer, TasksStateType} from '../TodoList/Task/task-reducer';
+import {addTask, changeTask, removeTask, setTasks, taskReducer, TasksStateType} from '../reducers/task-reducer';
 
 let startState: TasksStateType = {}
 
@@ -74,7 +74,6 @@ test('A new task should be added', () => {
 
     expect(endState['2'].length).toBe(2)
     expect(endState['2'][0].title).toBe('Test Task')
-
 })
 
 test('The task should be deleted', () => {

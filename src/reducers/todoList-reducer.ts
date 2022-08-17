@@ -17,7 +17,7 @@ export const todoListReducer = (state = initialState, action: todoListActionType
             return state
     }
 }
-
+//actions
 export const setTodoLists = (todoLists: TodoListType[]) => ({type: 'SET-TODO-LISTS', todoLists} as const)
 export const addTodoList = (todoList: TodoListType) => ({type: 'ADD-TODO-LIST', todoList} as const)
 export const removeTodoList = (id: string) => ({type: 'REMOVE-TODO-LIST', id} as const)
@@ -30,6 +30,7 @@ export const fetchTodoLists = (): AppThunk => dispatch => {
         })
 }
 
+//thunks
 export const createTodoList = (title: string): AppThunk => dispatch => {
     todoListAPI.createTodoList(title)
         .then(res => {

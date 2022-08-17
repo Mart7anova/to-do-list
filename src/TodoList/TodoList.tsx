@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {fetchTodoLists} from './todoList-reducer';
+import {fetchTodoLists} from '../reducers/todoList-reducer';
 import {useAppDispatch, useAppSelector} from '../App/hooks';
 import {Task} from './Task/Task';
 
