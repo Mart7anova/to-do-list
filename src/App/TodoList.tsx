@@ -4,6 +4,8 @@ import {TodoListType} from '../api/api';
 import {createTask, deleteTask, fetchTasks, ModelType, updateTask} from '../reducers/task-reducer';
 import {Task} from './Task';
 import {AddItemForm} from '../components/AddItemForm';
+import {EditableSpan} from '../components/EditableSpan';
+import {updateTodoList} from '../reducers/todoList-reducer';
 
 type PropsType = {
     todoList: TodoListType
@@ -11,12 +13,18 @@ type PropsType = {
 
 export const TodoList: FC<PropsType> = (props) => {
     const {
-        todoList
+        todoList,
     } = props
 
     const tasks = useAppSelector(state => state.task)
     const dispatch = useAppDispatch()
 
+    //todoList
+    const changeTodoListTitle = useCallback((title: string) => {
+        dispatch(updateTodoList(todoList.id, title))
+    },[dispatch, todoList.id])
+
+    //task
     const changeTask = useCallback((taskId: string, changes: ModelType) => {
         dispatch(updateTask(todoList.id, taskId, changes))
     }, [dispatch, todoList.id])
@@ -35,8 +43,10 @@ export const TodoList: FC<PropsType> = (props) => {
 
     return (
         <div key={todoList.id}>
-            <h2>{todoList.title}</h2>
-            <AddItemForm addItem={addTask}/>
+            <h2>
+                {<EditableSpan value={todoList.title} onChange={changeTodoListTitle}/>}
+            </h2>
+            <AddItemForm addItem={addTask} itemTitle={'task'}/>
                 {
                     tasks[todoList.id].map(t => <Task key={t.id}
                                                       task={t}

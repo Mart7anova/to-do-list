@@ -14,17 +14,14 @@ export const TodoLists = () => {
     }, [dispatch])
 
     return (
-        <>
-
-            <Grid container spacing={3}>
-                {todoLists.map(t =>
-                    <Grid item key={t.id}>
-                        <Paper style={{padding: '10px'}}>
-                            <TodoList todoList={t}/>
-                        </Paper>
-                    </Grid>
-                )}
-            </Grid>
-        </>
+        <Grid container spacing={3}>
+            {todoLists.map(t =>
+                <Grid item key={t.id}>
+                    <Paper style={{padding: '10px'}}>
+                        <TodoList todoList={t} />
+                    </Paper>
+                </Grid>
+            )}
+        </Grid>
     );
 };
