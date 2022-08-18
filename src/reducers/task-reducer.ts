@@ -1,6 +1,6 @@
 import {taskAPI, TaskPriorities, TaskStatuses, TaskType, UpdateTaskModelType} from '../api/api';
 import {AppThunk, RootStateType} from '../store/store';
-import {setTodoLists} from './todoList-reducer';
+import {addTodoList, setTodoLists} from './todoList-reducer';
 
 const initialState: TasksStateType = {}
 
@@ -12,6 +12,11 @@ export const taskReducer = (state = initialState, action: TaskActionType): Tasks
                 copyState[t.id] = []
             })
             return copyState
+        case 'ADD-TODO-LIST':
+            return {
+                [action.todoList.id]: [],
+                ...state
+            }
         case 'SET-TASKS':
             return {
                 ...state,
@@ -93,6 +98,7 @@ export const updateTask = (todoListId: string, taskId: string, changes:ModelType
 
 //types
 export type TaskActionType = ReturnType<typeof setTodoLists>
+    | ReturnType<typeof addTodoList>
     | ReturnType<typeof setTasks>
     | ReturnType<typeof addTask>
     | ReturnType<typeof removeTask>
