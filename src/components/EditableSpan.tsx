@@ -1,4 +1,4 @@
-import {TextField} from '@material-ui/core';
+import {TextField, Tooltip} from '@material-ui/core';
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import style from './EditableSpan.module.scss'
 
@@ -24,19 +24,23 @@ export const EditableSpan: FC<PropsType> = (props) => {
         props.onChange(value)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setValue(props.value)
     }, [props.value])
 
     return (
         <div>
             {editMode
-                ? <TextField id="standard-basic"
+                ? <TextField className={style.inputContainer}
                              defaultValue={value}
                              onChange={onChangeHandler}
                              onBlur={deactivatedEditMode}
-                             onKeyUp={e=>e.key === 'Enter' && deactivatedEditMode()}/>
-                : <span className={style.textContainer} onDoubleClick={activeEditMode}>{props.value}</span>
+                             autoFocus
+                             onKeyUp={e => e.key === 'Enter' && deactivatedEditMode()}
+                />
+                : <Tooltip title={'use double-click to edit'}>
+                    <span className={style.textContainer} onDoubleClick={activeEditMode}>{props.value}</span>
+                </Tooltip>
             }
         </div>
     );

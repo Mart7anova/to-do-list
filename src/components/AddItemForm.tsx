@@ -5,9 +5,10 @@ import style from './AddItemForm.module.scss';
 type PropsType = {
     addItem: (title: string) => void
     disabled?: boolean
+    itemTitle: string
 }
 
-export const AddItemForm: FC<PropsType> = ({addItem, disabled}) => {
+export const AddItemForm: FC<PropsType> = ({addItem, disabled, itemTitle}) => {
     const [title, setTitle] = useState('')
     let [error, setError] = useState<string | null>(null)
 
@@ -33,7 +34,7 @@ export const AddItemForm: FC<PropsType> = ({addItem, disabled}) => {
 
     return (
         <div className={style.addItemFromContainer}>
-            <TextField label={error || 'Title'}
+            <TextField label={error || `Add a new ${itemTitle}`}
                        variant="outlined"
                        value={title}
                        error={!!error}

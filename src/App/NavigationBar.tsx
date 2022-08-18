@@ -7,7 +7,7 @@ export const NavigationBar = () => {
     return (
             <AppBar className={style.navigationBar} position="static" color={'default'}>
                 <Toolbar>
-                    <h1 className={style.heading}>ADD A NEW TO DO LIST</h1>
+                    <h1 className={style.heading}>TO-DO LIST APP</h1>
                     <AddTodoListFrom/>
                     <Button className={style.logoutButton} variant={'outlined'} color={'default'} disableElevation>Log out</Button>
                 </Toolbar>
