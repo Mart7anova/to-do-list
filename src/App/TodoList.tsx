@@ -1,7 +1,7 @@
 import React, {FC, useCallback, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import {TodoListType} from '../api/api';
-import {deleteTask, fetchTasks, ModelType, updateTask} from '../reducers/task-reducer';
+import {createTask, deleteTask, fetchTasks, ModelType, updateTask} from '../reducers/task-reducer';
 import {Task} from './Task';
 import {AddItemForm} from '../components/AddItemForm';
 
@@ -25,6 +25,10 @@ export const TodoList: FC<PropsType> = (props) => {
         dispatch(deleteTask(todoList.id, taskId))
     }, [dispatch, todoList.id])
 
+    const addTask = useCallback((title: string) => {
+        dispatch(createTask(todoList.id, title))
+    }, [dispatch, todoList.id])
+
     useEffect(() => {
         dispatch(fetchTasks(todoList.id))
     }, [dispatch, todoList.id])
@@ -32,7 +36,7 @@ export const TodoList: FC<PropsType> = (props) => {
     return (
         <div key={todoList.id}>
             <h2>{todoList.title}</h2>
-            <AddItemForm/>
+            <AddItemForm addItem={addTask}/>
             {
                 tasks[todoList.id].map(t => <Task key={t.id}
                                                   task={t}
