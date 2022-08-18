@@ -1,5 +1,6 @@
 import {AppThunk} from '../store/store';
 import {authAPI} from '../api/api';
+import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
 
 const initialState: initialAppStateType = {
     //авторизация пользователя
@@ -33,7 +34,12 @@ export const initializeApp = (): AppThunk => dispatch => {
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsInitialized(true))
+            } else {
+                handleServerAppError(res.data, dispatch)
             }
+        })
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
         })
 }
 
@@ -41,6 +47,8 @@ export const initializeApp = (): AppThunk => dispatch => {
 export type AppActionType = ReturnType<typeof setIsInitialized>
     | ReturnType<typeof setAppError>
     | ReturnType<typeof setRequestStatus>
+
+export type ErrorStatus = ReturnType<typeof setAppError> | ReturnType<typeof setRequestStatus>
 
 export type initialAppStateType = {
     isInitialized: boolean

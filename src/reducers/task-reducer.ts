@@ -1,6 +1,7 @@
 import {taskAPI, TaskPriorities, TaskStatuses, TaskType, UpdateTaskModelType} from '../api/api';
 import {AppThunk, RootStateType} from '../store/store';
 import {addTodoList, setTodoLists} from './todoList-reducer';
+import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
 
 const initialState: TasksStateType = {}
 
@@ -52,6 +53,9 @@ export const fetchTasks = (todoListId: string): AppThunk => dispatch => {
                 dispatch(setTasks(todoListId, res.data.items))
             }
         })
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
+        })
 }
 
 export const createTask = (todoListId: string, title: string): AppThunk => dispatch =>{
@@ -59,9 +63,13 @@ export const createTask = (todoListId: string, title: string): AppThunk => dispa
         .then(res=>{
             if(res.data.resultCode === 0){
                 dispatch(addTask(res.data.data.item))
+            } else {
+                handleServerAppError(res.data, dispatch)
             }
         })
-
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
+        })
 }
 
 export const deleteTask = (todoListId: string, taskId: string): AppThunk => dispatch =>{
@@ -69,7 +77,12 @@ export const deleteTask = (todoListId: string, taskId: string): AppThunk => disp
         .then(res=>{
             if(res.data.resultCode === 0){
                 dispatch(removeTask(todoListId, taskId))
+            } else {
+                handleServerAppError(res.data, dispatch)
             }
+        })
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
         })
 }
 
@@ -92,7 +105,12 @@ export const updateTask = (todoListId: string, taskId: string, changes:ModelType
         .then(res=>{
             if(res.data.resultCode === 0){
                 dispatch(changeTask(todoListId, taskId, model))
+            } else {
+                handleServerAppError(res.data, dispatch)
             }
+        })
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
         })
 }
 

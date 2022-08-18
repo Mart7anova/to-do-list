@@ -1,5 +1,6 @@
 import {todoListAPI, TodoListType} from '../api/api';
 import {AppThunk} from '../store/store';
+import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
 
 const initialState: TodoListType[] = []
 
@@ -28,6 +29,9 @@ export const fetchTodoLists = (): AppThunk => dispatch => {
         .then(res => {
             dispatch(setTodoLists(res.data))
         })
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
+        })
 }
 
 //thunks
@@ -37,8 +41,11 @@ export const createTodoList = (title: string): AppThunk => dispatch => {
             if (res.data.resultCode === 0) {
                 dispatch(addTodoList(res.data.data.item))
             } else {
-
+                handleServerAppError(res.data, dispatch)
             }
+        })
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
         })
 }
 
@@ -48,8 +55,11 @@ export const deleteTodoList = (id: string): AppThunk => dispatch => {
             if (res.data.resultCode === 0) {
                 dispatch(removeTodoList(id))
             } else {
-
+                handleServerAppError(res.data, dispatch)
             }
+        })
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
         })
 }
 
@@ -59,8 +69,11 @@ export const updateTodoList = (id: string, title: string): AppThunk => dispatch 
             if (res.data.resultCode === 0) {
                 dispatch(changeTodoList(id, title))
             } else {
-
+                handleServerAppError(res.data, dispatch)
             }
+        })
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
         })
 }
 

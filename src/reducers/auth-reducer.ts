@@ -1,5 +1,6 @@
 import {AppThunk} from '../store/store';
 import {authAPI, LoginParamsType} from '../api/api';
+import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
 
 const initialState = {
     //Аутентификация пользователя
@@ -22,7 +23,12 @@ export const login = (data: LoginParamsType): AppThunk => dispatch =>{
         .then(res=>{
             if(res.data.resultCode === 0){
                 dispatch(setIsLoggedIn(true))
+            } else {
+                handleServerAppError(res.data, dispatch)
             }
+        })
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
         })
 }
 
@@ -31,7 +37,12 @@ export const logout = (): AppThunk => dispatch =>{
         .then(res=>{
             if(res.data.resultCode === 0){
                 dispatch(setIsLoggedIn(false))
+            } else {
+                handleServerAppError(res.data, dispatch)
             }
+        })
+        .catch(e=>{
+            handleServerNetworkError(e, dispatch)
         })
 }
 

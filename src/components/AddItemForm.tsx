@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useState, KeyboardEvent} from 'react';
+import React, {ChangeEvent, FC, useState, KeyboardEvent, memo} from 'react';
 import {Button, TextField} from '@material-ui/core';
 import style from './AddItemForm.module.scss';
 
@@ -8,7 +8,7 @@ type PropsType = {
     itemTitle: string
 }
 
-export const AddItemForm: FC<PropsType> = ({addItem, disabled, itemTitle}) => {
+export const AddItemForm: FC<PropsType> = memo( ({addItem, disabled, itemTitle}) => {
     const [title, setTitle] = useState('')
     let [error, setError] = useState<string | null>(null)
 
@@ -53,4 +53,4 @@ export const AddItemForm: FC<PropsType> = ({addItem, disabled, itemTitle}) => {
             </Button>
         </div>
     );
-};
+});

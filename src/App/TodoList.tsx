@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useEffect} from 'react';
+import React, {FC, memo, useCallback, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import {TodoListType} from '../api/api';
 import {createTask, deleteTask, fetchTasks, ModelType, updateTask} from '../reducers/task-reducer';
@@ -13,7 +13,7 @@ type PropsType = {
     todoList: TodoListType
 }
 
-export const TodoList: FC<PropsType> = (props) => {
+export const TodoList: FC<PropsType> = memo( (props) => {
     const {
         todoList,
     } = props
@@ -73,4 +73,4 @@ export const TodoList: FC<PropsType> = (props) => {
             }
         </div>
     );
-};
+});

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC} from 'react';
+import React, {ChangeEvent, FC, memo} from 'react';
 import {EditableSpan} from '../components/EditableSpan';
 import {TaskStatuses, TaskType} from '../api/api';
 import {ModelType} from '../reducers/task-reducer';
@@ -12,7 +12,7 @@ type PropsType = {
     removeTask: (taskId: string) => void
 }
 
-export const Task: FC<PropsType> = (props) => {
+export const Task: FC<PropsType> = memo((props) => {
     const {
         task,
         changeTask,
@@ -50,4 +50,4 @@ export const Task: FC<PropsType> = (props) => {
             </IconButton>
         </Grid>
     );
-};
+});

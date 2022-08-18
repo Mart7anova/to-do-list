@@ -1,5 +1,5 @@
 import {TextField, Tooltip} from '@material-ui/core';
-import React, {ChangeEvent, FC, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, memo, useEffect, useState} from 'react';
 import style from './EditableSpan.module.scss'
 
 type PropsType = {
@@ -7,7 +7,7 @@ type PropsType = {
     onChange: (value: string) => void
 }
 
-export const EditableSpan: FC<PropsType> = (props) => {
+export const EditableSpan: FC<PropsType> = memo((props) => {
     const [value, setValue] = useState(props.value)
     const [editMode, setEditMode] = useState(false)
 
@@ -44,5 +44,5 @@ export const EditableSpan: FC<PropsType> = (props) => {
             }
         </div>
     );
-};
+});
 
