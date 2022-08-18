@@ -6,6 +6,8 @@ import {Task} from './Task';
 import {AddItemForm} from '../components/AddItemForm';
 import {EditableSpan} from '../components/EditableSpan';
 import {deleteTodoList, updateTodoList} from '../reducers/todoList-reducer';
+import style from '../components/AddItemForm.module.scss';
+import {Button, Grid} from '@material-ui/core';
 
 type PropsType = {
     todoList: TodoListType
@@ -47,9 +49,20 @@ export const TodoList: FC<PropsType> = (props) => {
 
     return (
         <div key={todoList.id}>
-            <h2>
-                {<EditableSpan value={todoList.title} onChange={changeTodoListTitle}/>}
-            </h2>
+            <Grid container justifyContent={'space-between'}>
+                <h2>
+                    {<EditableSpan value={todoList.title} onChange={changeTodoListTitle}/>}
+                </h2>
+                <Button className={style.addButton}
+                        variant={'text'}
+                        color={'default'}
+                        disableElevation
+                        size={'small'}
+                        onClick={removeTodoList}
+                >
+                    <p>x</p>
+                </Button>
+            </Grid>
             <AddItemForm addItem={addTask} itemTitle={'task'}/>
             {
                 tasks[todoList.id].map(t => <Task key={t.id}
