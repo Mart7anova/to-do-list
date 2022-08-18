@@ -1,5 +1,6 @@
 import {TextField} from '@material-ui/core';
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
+import style from './EditableSpan.module.scss'
 
 type PropsType = {
     value: string
@@ -35,7 +36,7 @@ export const EditableSpan: FC<PropsType> = (props) => {
                              onChange={onChangeHandler}
                              onBlur={deactivatedEditMode}
                              onKeyUp={e=>e.key === 'Enter' && deactivatedEditMode()}/>
-                : <span onDoubleClick={activeEditMode}>{props.value}</span>
+                : <span className={style.textContainer} onDoubleClick={activeEditMode}>{props.value}</span>
             }
         </div>
     );

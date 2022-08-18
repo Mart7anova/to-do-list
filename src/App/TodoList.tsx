@@ -37,13 +37,13 @@ export const TodoList: FC<PropsType> = (props) => {
         <div key={todoList.id}>
             <h2>{todoList.title}</h2>
             <AddItemForm addItem={addTask}/>
-            {
-                tasks[todoList.id].map(t => <Task key={t.id}
-                                                  task={t}
-                                                  changeTask={changeTask}
-                                                  removeTask={removeTask}
-                />)
-            }
+                {
+                    tasks[todoList.id].map(t => <Task key={t.id}
+                                                      task={t}
+                                                      changeTask={changeTask}
+                                                      removeTask={removeTask}
+                    />)
+                }
         </div>
     );
 };

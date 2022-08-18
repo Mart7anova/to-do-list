@@ -2,8 +2,9 @@ import React, {ChangeEvent, FC} from 'react';
 import {EditableSpan} from '../components/EditableSpan';
 import {TaskStatuses, TaskType} from '../api/api';
 import {ModelType} from '../reducers/task-reducer';
-import {Checkbox, Grid, IconButton, Tooltip} from '@material-ui/core';
-import {CheckCircleOutline, HighlightOff, RadioButtonUnchecked} from '@material-ui/icons';
+import {Checkbox, Grid, IconButton} from '@material-ui/core';
+import {CheckCircleOutline, RadioButtonUnchecked} from '@material-ui/icons';
+import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 
 type PropsType = {
     task: TaskType
@@ -32,26 +33,21 @@ export const Task: FC<PropsType> = (props) => {
     }
 
     return (
-        <Grid direction={'row'}>
-      {/*  <div key={task.id}>*/}
-            <Tooltip title="Checked">
-                <Checkbox icon={<RadioButtonUnchecked/>}
-                          checkedIcon={<CheckCircleOutline/>}
-                          color={'primary'}
-                          checked={task.status === TaskStatuses.Completed}
-                          onChange={onChangeStatus}
-                />
-            </Tooltip>
+        <Grid key={task.id} container direction={'row'} alignItems={'center'} style={{marginTop: '10px'}}>
+            <Checkbox icon={<RadioButtonUnchecked/>}
+                      checkedIcon={<CheckCircleOutline color={'action'}/>}
+                      color={'default'}
+                      size={'medium'}
+                      checked={task.status === TaskStatuses.Completed}
+                      onChange={onChangeStatus}
+            />
             <EditableSpan value={task.title} onChange={onChangeTitle}/>
-
-            <Tooltip title="Delete">
-                <IconButton aria-label="delete"
-                            onClick={removeHandler}
-                >
-                    <HighlightOff/>
-                </IconButton>
-            </Tooltip>
-       {/* </div>*/}
+            <IconButton aria-label="delete"
+                        onClick={removeHandler}
+                        size={'medium'}
+            >
+                <HighlightOffRoundedIcon/>
+            </IconButton>
         </Grid>
     );
 };
