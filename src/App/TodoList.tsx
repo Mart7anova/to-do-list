@@ -5,7 +5,7 @@ import {createTask, deleteTask, fetchTasks, ModelType, updateTask} from '../redu
 import {Task} from './Task';
 import {AddItemForm} from '../components/AddItemForm';
 import {EditableSpan} from '../components/EditableSpan';
-import {updateTodoList} from '../reducers/todoList-reducer';
+import {deleteTodoList, updateTodoList} from '../reducers/todoList-reducer';
 
 type PropsType = {
     todoList: TodoListType
@@ -22,7 +22,11 @@ export const TodoList: FC<PropsType> = (props) => {
     //todoList
     const changeTodoListTitle = useCallback((title: string) => {
         dispatch(updateTodoList(todoList.id, title))
-    },[dispatch, todoList.id])
+    }, [dispatch, todoList.id])
+
+    const removeTodoList = useCallback(() => {
+        dispatch(deleteTodoList(todoList.id))
+    }, [dispatch, todoList.id])
 
     //task
     const changeTask = useCallback((taskId: string, changes: ModelType) => {
@@ -47,13 +51,13 @@ export const TodoList: FC<PropsType> = (props) => {
                 {<EditableSpan value={todoList.title} onChange={changeTodoListTitle}/>}
             </h2>
             <AddItemForm addItem={addTask} itemTitle={'task'}/>
-                {
-                    tasks[todoList.id].map(t => <Task key={t.id}
-                                                      task={t}
-                                                      changeTask={changeTask}
-                                                      removeTask={removeTask}
-                    />)
-                }
+            {
+                tasks[todoList.id].map(t => <Task key={t.id}
+                                                  task={t}
+                                                  changeTask={changeTask}
+                                                  removeTask={removeTask}
+                />)
+            }
         </div>
     );
 };

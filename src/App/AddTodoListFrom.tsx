@@ -13,7 +13,7 @@ export const AddTodoListFrom = () => {
 
     return (
         <div className={style.addItemFromContainer}>
-            <AddItemForm addItem={addTodoList}/>
+            <AddItemForm addItem={addTodoList} itemTitle={'to-do list'}/>
         </div>
     );
 };
