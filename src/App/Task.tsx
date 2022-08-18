@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC} from 'react';
 import {EditableSpan} from '../components/EditableSpan';
 import {TaskStatuses, TaskType} from '../api/api';
 import {ModelType} from '../reducers/task-reducer';
-import {Checkbox, IconButton, Tooltip} from '@material-ui/core';
+import {Checkbox, Grid, IconButton, Tooltip} from '@material-ui/core';
 import {CheckCircleOutline, HighlightOff, RadioButtonUnchecked} from '@material-ui/icons';
 
 type PropsType = {
@@ -32,7 +32,8 @@ export const Task: FC<PropsType> = (props) => {
     }
 
     return (
-        <div key={task.id}>
+        <Grid direction={'row'}>
+      {/*  <div key={task.id}>*/}
             <Tooltip title="Checked">
                 <Checkbox icon={<RadioButtonUnchecked/>}
                           checkedIcon={<CheckCircleOutline/>}
@@ -50,6 +51,7 @@ export const Task: FC<PropsType> = (props) => {
                     <HighlightOff/>
                 </IconButton>
             </Tooltip>
-        </div>
+       {/* </div>*/}
+        </Grid>
     );
 };

@@ -1,12 +1,19 @@
 .navigationBar {
-  flex-grow: 1;
-
-  .menuButton {
-    margin-right: 10px;
-  }
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: rgba(40, 42, 46, 0.3);
 
   .heading{
-    font-size: 18px;
+    font-size: 24px;
     flex-grow: 1;
+  }
+
+  .addItemFromContainer{
+    width: 300px;
+    flex-grow: 25;
+  }
+
+  .logoutButton{
+    flex-grow: 2;
   }
 }

@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import {TodoListType} from '../api/api';
 import {deleteTask, fetchTasks, ModelType, updateTask} from '../reducers/task-reducer';
 import {Task} from './Task';
+import {AddItemForm} from '../components/AddItemForm';
 
 type PropsType = {
     todoList: TodoListType
@@ -30,7 +31,8 @@ export const TodoList: FC<PropsType> = (props) => {
 
     return (
         <div key={todoList.id}>
-            <h1>{todoList.title}</h1>
+            <h2>{todoList.title}</h2>
+            <AddItemForm/>
             {
                 tasks[todoList.id].map(t => <Task key={t.id}
                                                   task={t}

@@ -1,23 +1,18 @@
 import React from 'react';
-import {AppBar, Button, IconButton, Toolbar} from '@material-ui/core';
-import {Menu} from '@material-ui/icons'
+import {AppBar, Button, Grid, Toolbar} from '@material-ui/core';
 import style from './NavigationBar.module.scss'
+import {AddItemForm} from '../components/AddItemForm';
 
 export const NavigationBar = () => {
     return (
-        <div className={style.navigationBar}>
-            <AppBar position="static">
+            <AppBar className={style.navigationBar} position="static" color={'default'}>
                 <Toolbar>
-                    <IconButton className={style.menuButton}
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu">
-                        <Menu/>
-                    </IconButton>
-                    <h1 className={style.heading}>TO DO LIST</h1>
-                    <Button color="inherit">Log out</Button>
+                    <h1 className={style.heading}>ADD A NEW TO DO LIST</h1>
+                    <Grid className={style.addItemFromContainer}>
+                        <AddItemForm/>
+                    </Grid>
+                    <Button className={style.logoutButton} variant={'contained'} color={'default'} disableElevation>Log out</Button>
                 </Toolbar>
             </AppBar>
-        </div>
     );
 };
