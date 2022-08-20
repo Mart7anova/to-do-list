@@ -12,8 +12,10 @@ import {
     TextField
 } from '@material-ui/core';
 import style from './styles/Login.module.scss';
-import {useAppDispatch} from '../hooks/hooks';
+import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import {login} from '../reducers/auth-reducer';
+import {LoginParamsType} from '../api/api';
+import {Navigate} from 'react-router-dom';
 
 type FormikErrorsType = {
     email?: string
@@ -22,6 +24,7 @@ type FormikErrorsType = {
 }
 
 export const Login = () => {
+    const isInitialized = useAppSelector(state => state.app.isInitialized)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -37,17 +40,22 @@ export const Login = () => {
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             }
-            if(!values.password){
+            if (!values.password) {
                 errors.password = 'password required';
-            }else if (values.password.length < 3){
+            } else if (values.password.length < 3) {
                 errors.password = 'The password is too short'
             }
             return errors
         },
-        onSubmit: values => {
+        onSubmit: (values: LoginParamsType) => {
             dispatch(login(values))
         },
     });
+
+    if(isInitialized){
+        return <Navigate to={'/'}/>
+    }
+
     return (
         <Grid container justifyContent={'center'}>
             <Paper className={style.paperContainer}>
@@ -66,23 +74,27 @@ export const Login = () => {
                     </FormLabel>
                     <form onSubmit={formik.handleSubmit}>
                         <FormGroup>
-                            <TextField label={formik.errors.email || 'email'}
+                            <TextField className={style.TextField}
+                                       label={formik.errors.email || 'email'}
                                        error={!!formik.errors.email}
                                        {...formik.getFieldProps('email')}
                                        variant="outlined"
                             />
-                            <TextField label={formik.errors.password || 'password'}
+                            <TextField className={style.TextField}
+                                       label={formik.errors.password || 'password'}
                                        error={!!formik.errors.password}
                                        {...formik.getFieldProps('password')}
                                        variant="outlined"
+                                       type="password"
                             />
-                            <FormControlLabel control={<Checkbox color={'default'}/>}
-                                              label={'remember me'}
-                                              {...formik.getFieldProps('rememberMe')}
+                            <FormControlLabel label={'remember me'}
+                                              control={<Checkbox color={'default'}
+                                                                 {...formik.getFieldProps('rememberMe')}/>}
                             />
-                            <Button variant={'outlined'}
+                            <Button type={'submit'}
+                                    onSubmit={() => formik.resetForm()}
+                                    variant={'outlined'}
                                     color={'default'}
-                                    disableElevation
                             >Submit
                             </Button>
                         </FormGroup>
