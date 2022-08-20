@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import style from './NavigationBar.module.scss'
+import style from './styles/NavigationBar.module.scss'
 import {AddItemForm} from '../components/AddItemForm';
 import {useAppDispatch} from '../hooks/hooks';
 import {createTodoList} from '../reducers/todoList-reducer';

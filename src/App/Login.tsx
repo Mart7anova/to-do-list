@@ -11,7 +11,7 @@ import {
     Paper,
     TextField
 } from '@material-ui/core';
-import style from './Login.module.scss';
+import style from './styles/Login.module.scss';
 import {useAppDispatch} from '../hooks/hooks';
 import {login} from '../reducers/auth-reducer';
 

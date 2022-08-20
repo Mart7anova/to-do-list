@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {AppBar, Button, Toolbar} from '@material-ui/core';
-import style from './NavigationBar.module.scss'
+import style from './styles/NavigationBar.module.scss'
 import {AddTodoListFrom} from './AddTodoListFrom';
 import {useAppDispatch} from '../hooks/hooks';
 import {logout} from '../reducers/auth-reducer';
