@@ -15,7 +15,7 @@ export const TodoLists = () => {
         dispatch(fetchTodoLists())
     }, [dispatch])
 
-    if(!isLoggedIn){
+    if (!isLoggedIn) {
         return <Navigate to={'login'}/>
     }
 
@@ -23,11 +23,11 @@ export const TodoLists = () => {
         <Grid container spacing={3}>
             {
                 todoLists.map(t =>
-                <Grid item key={t.id}>
-                    <Paper style={{padding: '10px'}}>
-                        <TodoList todoList={t} />
-                    </Paper>
-                </Grid>)
+                    <Grid item key={t.id}>
+                        <Paper style={{padding: '10px'}}>
+                            <TodoList todoList={t}/>
+                        </Paper>
+                    </Grid>)
             }
         </Grid>
     );

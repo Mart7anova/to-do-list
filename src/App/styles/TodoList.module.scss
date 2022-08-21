@@ -1,4 +1,12 @@
-.heading{
+.heading {
   font-size: 26px;
   margin-bottom: 20px;
+}
+
+.ButtonGroup {
+  height: 56px;
+
+  & p{
+    margin: 0 4px;
+  }
 }
