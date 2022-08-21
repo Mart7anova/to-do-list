@@ -5,6 +5,7 @@ import {ModelType} from '../reducers/task-reducer';
 import {Checkbox, Grid, IconButton} from '@material-ui/core';
 import {CheckCircleOutline, RadioButtonUnchecked} from '@material-ui/icons';
 import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
+import style from './styles/Task.module.scss'
 
 type PropsType = {
     task: TaskType
@@ -33,7 +34,7 @@ export const Task: FC<PropsType> = memo((props) => {
     }
 
     return (
-        <Grid key={task.id} container direction={'row'} alignItems={'center'} style={{marginTop: '10px'}}>
+        <Grid key={task.id} container direction={'row'} alignItems={'center'} className={style.taskContainer}>
             <Checkbox icon={<RadioButtonUnchecked/>}
                       checkedIcon={<CheckCircleOutline color={'action'}/>}
                       color={'default'}
