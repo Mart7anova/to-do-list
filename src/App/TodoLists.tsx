@@ -8,14 +8,14 @@ import {Navigate} from 'react-router-dom';
 
 export const TodoLists = () => {
     const todoLists = useAppSelector(state => state.todoList)
-    const isInitialized = useAppSelector(state => state.app.isInitialized)
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(fetchTodoLists())
     }, [dispatch])
 
-    if(!isInitialized){
+    if(!isLoggedIn){
         return <Navigate to={'login'}/>
     }
 

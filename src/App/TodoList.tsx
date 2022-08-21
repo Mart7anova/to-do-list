@@ -6,7 +6,7 @@ import {Task} from './Task';
 import {AddItemForm} from '../components/AddItemForm';
 import {EditableSpan} from '../components/EditableSpan';
 import {deleteTodoList, updateTodoList} from '../reducers/todoList-reducer';
-import style from '../components/AddItemForm.module.scss';
+import style from './styles/TodoList.module.scss';
 import {Button, Grid} from '@material-ui/core';
 
 type PropsType = {
@@ -50,7 +50,7 @@ export const TodoList: FC<PropsType> = memo( (props) => {
     return (
         <div key={todoList.id}>
             <Grid container justifyContent={'space-between'}>
-                <h2>
+                <h2 className={style.heading}>
                     {<EditableSpan value={todoList.title} onChange={changeTodoListTitle}/>}
                 </h2>
                 <Button className={style.addButton}
