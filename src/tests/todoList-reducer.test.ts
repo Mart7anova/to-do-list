@@ -1,12 +1,18 @@
-import {TodoListType} from '../api/api';
-import {addTodoList, changeTodoList, removeTodoList, setTodoLists, todoListReducer} from '../reducers/todoList-reducer';
+import {
+    addTodoList, changeTodoListFilter,
+    changeTodoListTitle, FilterValuesType,
+    removeTodoList,
+    setTodoLists,
+    todoListReducer,
+    TodoListStateType
+} from '../reducers/todoList-reducer';
 
-let startState: TodoListType[] = []
+let startState: TodoListStateType[] = []
 
 beforeEach(() => {
     startState = [
-        {id: '1', title: 'What to learn', addedDate: '16.08.2022', order: -1},
-        {id: '2', title: 'What to buy', addedDate: '16.08.2022', order: 0}
+        {id: '1', title: 'What to learn', addedDate: '16.08.2022', order: -1, filter: 'all'},
+        {id: '2', title: 'What to buy', addedDate: '16.08.2022', order: 0, filter: 'all'}
     ]
 })
 
@@ -35,8 +41,16 @@ test('The todo list should be deleted', () => {
 test('The todo list should to be changed', () => {
     const newTitle = 'Test title'
 
-    const endState = todoListReducer(startState, changeTodoList('1', newTitle))
+    const endState = todoListReducer(startState, changeTodoListTitle('1', newTitle))
 
     expect(endState.length).toBe(2)
     expect(endState[0].title).toBe('Test title')
+})
+test('The filter should to be changed', () => {
+    const newFilter:FilterValuesType = 'completed'
+
+    const endState = todoListReducer(startState, changeTodoListFilter('1', newFilter))
+
+    expect(endState.length).toBe(2)
+    expect(endState[0].filter).toBe('completed')
 })
