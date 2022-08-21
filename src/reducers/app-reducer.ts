@@ -26,7 +26,7 @@ export const appReducer = (state: initialAppStateType = initialState, action: Ap
 }
 //actions
 export const setIsInitialized = (value: boolean) => ({type: 'SET-IS-INITIALIZED', value} as const)
-export const setAppError = (error: string) => ({type: 'SET-APP-ERROR', error} as const)
+export const setAppError = (error: ErrorType) => ({type: 'SET-APP-ERROR', error} as const)
 export const setRequestStatus = (value: RequestStatusType) => ({type: 'SET-REQUEST-STATUS', value} as const)
 
 //thunks
@@ -56,8 +56,9 @@ export type ErrorStatus = ReturnType<typeof setAppError> | ReturnType<typeof set
 
 export type initialAppStateType = {
     isInitialized: boolean
-    error: null | string
+    error: ErrorType
     requestStatus: RequestStatusType
 }
+type ErrorType = null | string
 
 type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

@@ -8,14 +8,15 @@ import {PageNotFound} from './PageNotFound';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import {Loading} from './Loading';
 import {initializeApp} from '../reducers/app-reducer';
+import {ErrorSnackbar} from '../components/ErrorSnackbar';
 
 function App() {
     const isInitialized = useAppSelector(state => state.app.isInitialized)
     const dispatch = useAppDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(initializeApp())
-    },[dispatch])
+    }, [dispatch])
 
     if (!isInitialized) {
         return <Loading/>
@@ -26,10 +27,12 @@ function App() {
             <Container fixed>
                 <Routes>
                     <Route path={'/'} element={<TodoLists/>}/>
-                    <Route path={'*'} element={<PageNotFound/>}/>
+                    <Route path={'*'} element={'404'}/>
+                    <Route path={'404'} element={<PageNotFound/>}/>
                     <Route path={'login'} element={<Login/>}/>
                 </Routes>
             </Container>
+            <ErrorSnackbar/>
         </div>
     );
 }
