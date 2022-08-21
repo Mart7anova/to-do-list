@@ -1,19 +1,31 @@
-.navigationBar {
+.AppBar {
   margin-bottom: 20px;
   padding: 10px 0;
-  background-color: rgba(40, 42, 46, 0.3);
 
-  .heading{
-    font-size: 24px;
-    flex-grow: 1;
+  .Toolbar{
+    display: flex;
+
+    @media screen and (max-width: 627px){
+      flex-flow: column wrap;
+      align-items: start;
+    }
+
+    .heading{
+      font-size: 24px;
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+
+    .addItemContainer{
+      flex-grow: 30;
+    }
+
+    .logoutButton{
+      flex-grow: 1;
+      height: 56px;
+      margin-top: 5px;
+    }
   }
 
-  .addItemFromContainer{
-    flex-grow: 30;
-  }
 
-  .logoutButton{
-    flex-grow: 1;
-    height: 56px;
-  }
 }

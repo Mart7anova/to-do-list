@@ -2,10 +2,14 @@
   width: 50%;
   display: flex;
   justify-content: center;
-  padding: 10px 0 20px;
+  padding: 20px;
 
   @media screen and (max-width: 960px) {
     width: 100%;
+  }
+
+  & p{
+    margin-bottom: 10px;
   }
 
   & a {

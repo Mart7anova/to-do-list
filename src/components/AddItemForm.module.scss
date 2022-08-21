@@ -1,10 +1,16 @@
-.addButton {
-  height: 56px;
+.addItemFromContainer{
+  display: flex;
+  flex-wrap: nowrap;
 
-  & p {
-    font-size: 25px;
-    color: #7f7f7f;
+  .addButton {
+    height: 56px;
+
+    & p {
+      font-size: 25px;
+      color: #7f7f7f;
+    }
   }
 }
+
 
 
