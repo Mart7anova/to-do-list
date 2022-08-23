@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, useState, KeyboardEvent, memo} from 'react';
-import {Button, TextField} from '@material-ui/core';
-import style from './AddItemForm.module.scss';
+import {Button, TextField, withStyles} from '@material-ui/core';
+import style from './styles/AddItemForm.module.scss';
 
 type PropsType = {
     addItem: (title: string) => void
@@ -8,9 +8,9 @@ type PropsType = {
     itemTitle: string
 }
 
-export const AddItemForm: FC<PropsType> = memo( ({addItem, disabled, itemTitle}) => {
+export const AddItemForm: FC<PropsType> = memo(({addItem, disabled, itemTitle}) => {
     const [title, setTitle] = useState('')
-    let [error, setError] = useState<string | null>(null)
+    const [error, setError] = useState<string | null>(null)
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setTitle(e.currentTarget.value)
@@ -18,8 +18,12 @@ export const AddItemForm: FC<PropsType> = memo( ({addItem, disabled, itemTitle})
     }
 
     const addHandler = () => {
-        if (title.trim() !== '') {
-            addItem(title);
+        const titleTrim = title.trim()
+
+        if (titleTrim.length > 100) {
+            setError('Max length of 100 characters')
+        } else if (titleTrim !== '') {
+            addItem(titleTrim);
             setTitle('');
         } else {
             setError('Title is required');
@@ -34,13 +38,16 @@ export const AddItemForm: FC<PropsType> = memo( ({addItem, disabled, itemTitle})
 
     return (
         <div className={style.addItemFromContainer}>
-            <TextField label={error || `Add a new ${itemTitle}`}
-                       variant="outlined"
-                       value={title}
-                       error={!!error}
-                       onChange={onChangeHandler}
-                       onKeyUp={onKeyUpHandler}
-            />
+            <div className={style.TextFieldContainer}>
+                <CssTextField label={error || `Add a new ${itemTitle}`}
+                              variant="outlined"
+                              value={title}
+                              error={!!error}
+                              onChange={onChangeHandler}
+                              onKeyUp={onKeyUpHandler}
+                              fullWidth
+                />
+            </div>
             <Button className={style.addButton}
                     variant={'outlined'}
                     color={'default'}
@@ -54,3 +61,26 @@ export const AddItemForm: FC<PropsType> = memo( ({addItem, disabled, itemTitle})
         </div>
     );
 });
+
+const CssTextField = withStyles({
+    root: {
+        '& label.Mui-focused': {
+            color: 'rgba(0,0,0,0.7)',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: 'green',
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: 'rgba(0, 0, 0, 0.23)',
+            },
+            '&:hover fieldset': {
+                backgroundColor: 'rgba(0,0,0,0.04)',
+                borderColor: 'rgba(0,0,0,0.2)'
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: 'rgba(0, 0, 0, 0.23)',
+            },
+        },
+    },
+})(TextField);

@@ -9,8 +9,14 @@ import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import {Loading} from './Loading';
 import {initializeApp} from '../reducers/app-reducer';
 import {ErrorSnackbar} from '../components/ErrorSnackbar';
+import style from './styles/App.module.scss'
+import background from '../assets/photo/background.jpg'
 
 function App() {
+    const img = {
+        backgroundImage: `url(${background})`
+    }
+
     const isInitialized = useAppSelector(state => state.app.isInitialized)
     const dispatch = useAppDispatch()
 
@@ -22,16 +28,18 @@ function App() {
         return <Loading/>
     }
     return (
-        <div className="App">
+        <div className={'App'}>
             <NavigationBar/>
-            <Container fixed>
-                <Routes>
-                    <Route path={'/'} element={<TodoLists/>}/>
-                    <Route path={'*'} element={'404'}/>
-                    <Route path={'404'} element={<PageNotFound/>}/>
-                    <Route path={'login'} element={<Login/>}/>
-                </Routes>
-            </Container>
+            <div className={style.backGroundImg} style={img}>
+                <Container fixed className={style.elementsContainer} >
+                    <Routes>
+                        <Route path={'/'} element={<TodoLists/>}/>
+                        <Route path={'*'} element={'404'}/>
+                        <Route path={'404'} element={<PageNotFound/>}/>
+                        <Route path={'login'} element={<Login/>}/>
+                    </Routes>
+                </Container>
+            </div>
             <ErrorSnackbar/>
         </div>
     );

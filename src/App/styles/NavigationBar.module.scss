@@ -1,31 +1,50 @@
-.AppBar {
-  margin-bottom: 20px;
-  padding: 10px 0;
+.AppBar{
 
-  .Toolbar{
-    display: flex;
+  .Toolbar {
+    padding: 20px;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #ffffff;
 
-    @media screen and (max-width: 627px){
-      flex-flow: column wrap;
-      align-items: start;
-    }
+      @media screen and (max-width: 627px) {
+        flex-flow: column wrap;
+        align-items: center;
+        padding: 20px 0;
+      }
 
-    .heading{
-      font-size: 24px;
-      flex-grow: 1;
-      margin-right: 10px;
-    }
+      .heading {
+        margin-right: 20px;
+        color: #3d4042;
 
-    .addItemContainer{
-      flex-grow: 30;
-    }
+        @media screen and (max-width: 627px) {
+          margin-bottom: 20px;
+        }
+      }
 
-    .logoutButton{
-      flex-grow: 1;
-      height: 56px;
-      margin-top: 5px;
-    }
+      .addItemContainer {
+        width: 30%;
+
+        @media screen and (max-width: 1131px) {
+            width: 50%;
+        }
+
+        @media screen and (max-width: 750px) {
+          width: 90%;
+        }
+      }
+
+      .logoutButton {
+        height: 56px;
+        margin-left: 50px;
+
+        @media screen and (max-width: 627px) {
+          margin-left: 0;
+          margin-top: 20px;
+        }
+      }
   }
-
-
 }
+
+
+
+

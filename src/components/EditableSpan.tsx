@@ -1,6 +1,6 @@
 import {TextField, Tooltip} from '@material-ui/core';
 import React, {ChangeEvent, FC, memo, useEffect, useState} from 'react';
-import style from './EditableSpan.module.scss'
+import style from './styles/EditableSpan.module.scss'
 
 type PropsType = {
     value: string

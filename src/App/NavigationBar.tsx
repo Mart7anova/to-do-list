@@ -18,9 +18,8 @@ export const NavigationBar = () => {
     }, [dispatch])
 
 
-
     return (
-        <AppBar className={style.AppBar} position={'static'} color={'default'}>
+        <AppBar className={style.AppBar} position={'fixed'}>
             <Toolbar className={style.Toolbar}>
                 <h1 className={style.heading}>TO-DO LIST APP</h1>
                 <div className={style.addItemContainer}>

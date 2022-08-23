@@ -1,0 +1,19 @@
+.backGroundImg{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 93vh;
+
+  .elementsContainer{
+    margin-top: 100px;
+
+    @media screen and (max-width: 866px) {
+      margin-top: 130px;
+    }
+
+    @media screen and (max-width: 627px) {
+      margin-top: 240px;
+    }
+  }
+}
+

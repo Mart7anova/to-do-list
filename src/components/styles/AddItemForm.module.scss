@@ -1,0 +1,21 @@
+.addItemFromContainer{
+  display: flex;
+  flex-wrap: nowrap;
+
+  .TextFieldContainer{
+    width: 100%;
+    border-color: #7f7f7f;
+  }
+
+  .addButton {
+    height: 56px;
+
+    & p {
+      font-size: 25px;
+      color: #7f7f7f;
+    }
+  }
+}
+
+
+

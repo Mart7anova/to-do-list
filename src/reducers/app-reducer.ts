@@ -1,6 +1,6 @@
 import {AppThunk} from '../store/store';
 import {authAPI} from '../api/api';
-import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
+import {handleServerNetworkError} from '../utils/error-utils';
 import {setIsLoggedIn} from './auth-reducer';
 
 const initialState: initialAppStateType = {
@@ -35,8 +35,6 @@ export const initializeApp = (): AppThunk => dispatch => {
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedIn(true))
-            } else {
-                handleServerAppError(res.data, dispatch)
             }
         })
         .catch(e=>{
