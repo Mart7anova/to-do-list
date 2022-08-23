@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import {TodoLists} from './TodoLists';
 import {NavigationBar} from './NavigationBar';
 import {Login} from './Login';
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import {PageNotFound} from './PageNotFound';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import {Loading} from './Loading';
@@ -30,11 +30,12 @@ function App() {
     return (
         <div className={'App'}>
             <NavigationBar/>
+
             <div className={style.backGroundImg} style={img}>
                 <Container fixed className={style.elementsContainer} >
                     <Routes>
                         <Route path={'/'} element={<TodoLists/>}/>
-                        <Route path={'*'} element={'404'}/>
+                        <Route path={'*'} element={<Navigate to={'/404'}/>}/>
                         <Route path={'404'} element={<PageNotFound/>}/>
                         <Route path={'login'} element={<Login/>}/>
                     </Routes>

@@ -2,6 +2,7 @@ import {taskAPI, TaskPriorities, TaskStatuses, TaskType, UpdateTaskModelType} fr
 import {AppThunk, RootStateType} from '../store/store';
 import {addTodoList, setTodoLists} from './todoList-reducer';
 import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
+import {setRequestStatus} from './app-reducer';
 
 const initialState: TasksStateType = {}
 
@@ -47,6 +48,7 @@ export const changeTask = (todoListId: string, taskId: string, model: UpdateTask
 
 //thunks
 export const fetchTasks = (todoListId: string): AppThunk => dispatch => {
+    dispatch(setRequestStatus('loading'))
     taskAPI.getTasks(todoListId)
         .then(res => {
             if(res.data.error === null){
@@ -56,9 +58,13 @@ export const fetchTasks = (todoListId: string): AppThunk => dispatch => {
         .catch(e=>{
             handleServerNetworkError(e, dispatch)
         })
+        .finally(()=>{
+            dispatch(setRequestStatus('succeeded'))
+        })
 }
 
 export const createTask = (todoListId: string, title: string): AppThunk => dispatch =>{
+    dispatch(setRequestStatus('loading'))
     taskAPI.createTask(todoListId, title)
         .then(res=>{
             if(res.data.resultCode === 0){
@@ -70,9 +76,13 @@ export const createTask = (todoListId: string, title: string): AppThunk => dispa
         .catch(e=>{
             handleServerNetworkError(e, dispatch)
         })
+        .finally(()=>{
+            dispatch(setRequestStatus('succeeded'))
+        })
 }
 
 export const deleteTask = (todoListId: string, taskId: string): AppThunk => dispatch =>{
+    dispatch(setRequestStatus('loading'))
     taskAPI.deleteTask(todoListId, taskId)
         .then(res=>{
             if(res.data.resultCode === 0){
@@ -83,6 +93,9 @@ export const deleteTask = (todoListId: string, taskId: string): AppThunk => disp
         })
         .catch(e=>{
             handleServerNetworkError(e, dispatch)
+        })
+        .finally(()=>{
+            dispatch(setRequestStatus('succeeded'))
         })
 }
 
@@ -100,7 +113,7 @@ export const updateTask = (todoListId: string, taskId: string, changes:ModelType
         ...task,
         ...changes
     }
-
+    dispatch(setRequestStatus('loading'))
     taskAPI.updateTask(todoListId, taskId, model)
         .then(res=>{
             if(res.data.resultCode === 0){
@@ -111,6 +124,9 @@ export const updateTask = (todoListId: string, taskId: string, changes:ModelType
         })
         .catch(e=>{
             handleServerNetworkError(e, dispatch)
+        })
+        .finally(()=>{
+            dispatch(setRequestStatus('succeeded'))
         })
 }
 

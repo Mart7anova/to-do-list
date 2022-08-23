@@ -1,6 +1,7 @@
 import {todoListAPI, TodoListType} from '../api/api';
 import {AppThunk} from '../store/store';
 import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
+import {setRequestStatus} from './app-reducer';
 
 const initialState: TodoListStateType[] = []
 
@@ -31,6 +32,7 @@ export const changeTodoListFilter = (id: string, filter: FilterValuesType) => (
 
 //thunks
 export const fetchTodoLists = (): AppThunk => dispatch => {
+    dispatch(setRequestStatus('loading'))
     todoListAPI.getTodoLists()
         .then(res => {
             dispatch(setTodoLists(res.data))
@@ -38,9 +40,13 @@ export const fetchTodoLists = (): AppThunk => dispatch => {
         .catch(e => {
             handleServerNetworkError(e, dispatch)
         })
+        .finally(()=>{
+            dispatch(setRequestStatus('succeeded'))
+        })
 }
 
 export const createTodoList = (title: string): AppThunk => dispatch => {
+    dispatch(setRequestStatus('loading'))
     todoListAPI.createTodoList(title)
         .then(res => {
             if (res.data.resultCode === 0) {
@@ -52,9 +58,13 @@ export const createTodoList = (title: string): AppThunk => dispatch => {
         .catch(e => {
             handleServerNetworkError(e, dispatch)
         })
+        .finally(()=>{
+            dispatch(setRequestStatus('succeeded'))
+        })
 }
 
 export const deleteTodoList = (id: string): AppThunk => dispatch => {
+    dispatch(setRequestStatus('loading'))
     todoListAPI.deleteTodoList(id)
         .then(res => {
             if (res.data.resultCode === 0) {
@@ -66,9 +76,13 @@ export const deleteTodoList = (id: string): AppThunk => dispatch => {
         .catch(e => {
             handleServerNetworkError(e, dispatch)
         })
+        .finally(()=>{
+            dispatch(setRequestStatus('succeeded'))
+        })
 }
 
 export const updateTodoList = (id: string, title: string): AppThunk => dispatch => {
+    dispatch(setRequestStatus('loading'))
     todoListAPI.updateTodoList(id, title)
         .then(res => {
             if (res.data.resultCode === 0) {
@@ -79,6 +93,9 @@ export const updateTodoList = (id: string, title: string): AppThunk => dispatch 
         })
         .catch(e => {
             handleServerNetworkError(e, dispatch)
+        })
+        .finally(()=>{
+            dispatch(setRequestStatus('succeeded'))
         })
 }
 

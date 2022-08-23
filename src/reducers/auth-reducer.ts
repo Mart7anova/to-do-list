@@ -1,6 +1,7 @@
 import {AppThunk} from '../store/store';
 import {authAPI, LoginParamsType} from '../api/api';
 import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
+import {setRequestStatus} from './app-reducer';
 
 const initialState = {
     //Аутентификация пользователя
@@ -19,6 +20,7 @@ export const setIsLoggedIn = (value: boolean) => ({type: 'SET-IS-LOGGED-IN',valu
 
 //thunks
 export const login = (data: LoginParamsType): AppThunk => dispatch =>{
+    dispatch(setRequestStatus('loading'))
     authAPI.login(data)
         .then(res=>{
             if(res.data.resultCode === 0){
@@ -30,9 +32,13 @@ export const login = (data: LoginParamsType): AppThunk => dispatch =>{
         .catch(e=>{
             handleServerNetworkError(e, dispatch)
         })
+        .finally(()=>{
+            dispatch(setRequestStatus('succeeded'))
+        })
 }
 
 export const logout = (): AppThunk => dispatch =>{
+    dispatch(setRequestStatus('loading'))
     authAPI.logout()
         .then(res=>{
             if(res.data.resultCode === 0){
@@ -43,6 +49,9 @@ export const logout = (): AppThunk => dispatch =>{
         })
         .catch(e=>{
             handleServerNetworkError(e, dispatch)
+        })
+        .finally(()=>{
+            dispatch(setRequestStatus('succeeded'))
         })
 }
 
