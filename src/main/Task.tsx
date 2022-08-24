@@ -2,10 +2,11 @@ import React, {ChangeEvent, FC, memo} from 'react';
 import {EditableSpan} from '../components/EditableSpan';
 import {TaskStatuses, TaskType} from '../api/api';
 import {ModelType} from '../reducers/task-reducer';
-import {Checkbox, Grid, IconButton} from '@material-ui/core';
+import {Checkbox, Grid, IconButton, withStyles} from '@material-ui/core';
 import {CheckCircleOutline, RadioButtonUnchecked} from '@material-ui/icons';
 import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 import style from './styles/Task.module.scss'
+import {green} from '@material-ui/core/colors';
 
 type PropsType = {
     task: TaskType
@@ -36,7 +37,7 @@ export const Task: FC<PropsType> = memo((props) => {
     return (
         <Grid key={task.id} container direction={'row'} alignItems={'center'} className={style.taskContainer}>
             <Checkbox icon={<RadioButtonUnchecked/>}
-                      checkedIcon={<CheckCircleOutline color={'action'}/>}
+                      checkedIcon={<GreenCheckbox />}
                       color={'default'}
                       size={'medium'}
                       checked={task.status === TaskStatuses.Completed}
@@ -52,3 +53,9 @@ export const Task: FC<PropsType> = memo((props) => {
         </Grid>
     );
 });
+
+const GreenCheckbox = withStyles({
+    root: {
+        color: green[400]
+    }
+})(CheckCircleOutline)

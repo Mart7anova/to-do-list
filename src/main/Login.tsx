@@ -96,7 +96,7 @@ export const Login = () => {
                                     onSubmit={() => formik.resetForm()}
                                     variant={'outlined'}
                                     color={'default'}
-                            >Submit
+                            >Log in
                             </Button>
                         </FormGroup>
                     </form>

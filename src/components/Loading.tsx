@@ -1,6 +1,6 @@
 import React from 'react';
-import loading from '../assets/gif/loading.gif'
-import style from '../App/styles/Loading.module.scss'
+import loading from '../common/gif/loading.gif'
+import style from '../main/styles/Loading.module.scss'
 
 export const Loading = () => {
     return (
