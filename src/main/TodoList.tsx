@@ -4,6 +4,7 @@ import {createTask, deleteTask, fetchTasks, ModelType, updateTask} from '../redu
 import {Task} from './Task';
 import {AddItemForm} from '../components/AddItemForm';
 import {EditableSpan} from '../components/EditableSpan';
+import CloseIcon from '@material-ui/icons/Close';
 import {
     changeTodoListFilter,
     deleteTodoList,
@@ -83,7 +84,7 @@ export const TodoList: FC<PropsType> = memo( (props) => {
                         size={'small'}
                         onClick={removeTodoList}
                 >
-                    <p>x</p>
+                    <CloseIcon color={'action'}/>
                 </Button>
             </Grid>
             <AddItemForm addItem={addTask} itemTitle={'task'}/>

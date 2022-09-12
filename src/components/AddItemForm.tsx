@@ -1,5 +1,6 @@
 import React, {ChangeEvent, FC, useState, KeyboardEvent, memo} from 'react';
 import {Button, TextField, withStyles} from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import style from './styles/AddItemForm.module.scss';
 
 type PropsType = {
@@ -56,7 +57,7 @@ export const AddItemForm: FC<PropsType> = memo(({addItem, disabled, itemTitle}) 
                     onClick={addHandler}
                     disabled={disabled || !!error}
             >
-                <p>+</p>
+                <AddIcon color={'action'}/>
             </Button>
         </div>
     );
