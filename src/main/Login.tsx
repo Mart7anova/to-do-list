@@ -32,7 +32,7 @@ export const Login = () => {
             email: '',
             password: '',
             rememberMe: false
-        },
+        }as LoginParamsType,
         validate: values => {
             const errors: FormikErrorsType = {}
             if (!values.email) {
