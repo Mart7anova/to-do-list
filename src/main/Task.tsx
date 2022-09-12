@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, memo} from 'react';
 import {EditableSpan} from '../components/EditableSpan';
 import {TaskStatuses, TaskType} from '../api/api';
 import {ModelType} from '../reducers/task-reducer';
-import {Checkbox, Grid, IconButton, withStyles} from '@material-ui/core';
+import {Checkbox, Grid, withStyles} from '@material-ui/core';
 import {CheckCircleOutline, RadioButtonUnchecked} from '@material-ui/icons';
 import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 import style from './styles/Task.module.scss'
@@ -37,25 +37,28 @@ export const Task: FC<PropsType> = memo((props) => {
     return (
         <Grid key={task.id} container direction={'row'} alignItems={'center'} className={style.taskContainer}>
             <Checkbox icon={<RadioButtonUnchecked/>}
-                      checkedIcon={<GreenCheckbox />}
+                      checkedIcon={<GreenCheckbox/>}
                       color={'default'}
                       size={'medium'}
                       checked={task.status === TaskStatuses.Completed}
                       onChange={onChangeStatus}
             />
             <EditableSpan value={task.title} onChange={onChangeTitle}/>
-            <IconButton aria-label="delete"
-                        onClick={removeHandler}
-                        size={'medium'}
-            >
-                <HighlightOffRoundedIcon/>
-            </IconButton>
-        </Grid>
-    );
+            <Checkbox icon={<HighlightOffRoundedIcon/>}
+                      onClick={removeHandler}
+                      size={'medium'}
+                      color={'default'}
+            />
+</Grid>
+)
+    ;
 });
 
 const GreenCheckbox = withStyles({
     root: {
-        color: green[400]
+        color: green[400],
+        'input:hover ~ &': {
+            backgroundColor: 'none'
+        }
     }
 })(CheckCircleOutline)
