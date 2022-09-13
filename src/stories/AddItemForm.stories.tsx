@@ -5,6 +5,10 @@ import {action} from '@storybook/addon-actions'
 export default {
     title: 'AddItemFrom',
     component: AddItemForm,
+    decorators: [
+        (AddItemForm)=>(
+        <div style={{width: '20%'}}><AddItemForm/></div>
+    )]
 }as ComponentMeta<typeof AddItemForm>
 
 const Template: ComponentStory<typeof AddItemForm> = (args) => <AddItemForm {...args}/>

@@ -6,7 +6,6 @@ import {Grid, Paper} from '@material-ui/core';
 import {Navigate} from 'react-router-dom';
 import style from './styles/TodoLists.module.scss'
 
-
 export const TodoLists = () => {
     const todoLists = useAppSelector(state => state.todoList)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)

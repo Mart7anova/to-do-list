@@ -8,7 +8,11 @@ import style from './styles/App.module.scss'
 import background from '../common/photo/background.jpg'
 import {RoutesApp} from './RoutesApp';
 
-function App() {
+type PropsType = {
+    demo?: boolean
+}
+
+function App({demo = false}: PropsType) {
     const img = {
         backgroundImage: `url(${background})`
     }

@@ -14,7 +14,8 @@ const rootReducer = combineReducers({
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
-export type RootStateType = ReturnType<typeof rootReducer>
+export type RootSReducerType = typeof rootReducer
+export type RootStateType = ReturnType<RootSReducerType>
 
 export type RootActionType = todoListActionType | TaskActionType | AuthActionType | AppActionType
 
