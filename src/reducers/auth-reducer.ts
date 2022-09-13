@@ -2,21 +2,24 @@ import {AppThunk} from '../store/store';
 import {authAPI, LoginParamsType} from '../api/api';
 import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
 import {setRequestStatus} from './app-reducer';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 const initialState = {
     //Аутентификация пользователя
     isLoggedIn: false
 }
 
-export const authReducer = (state: initialAuthStateType = initialState, action: AuthActionType): initialAuthStateType => {
-    switch (action.type){
-        case 'SET-IS-LOGGED-IN':
-            return {...state, isLoggedIn: action.value}
-        default: return state
+const slice = createSlice({
+    name: 'auth',
+    initialState,
+    reducers:{
+        setIsLoggedIn(state, action: PayloadAction<boolean>){
+            state.isLoggedIn = action.payload
+        }
     }
-}
-//actions
-export const setIsLoggedIn = (value: boolean) => ({type: 'SET-IS-LOGGED-IN',value} as const)
+})
+export const authReducer = slice.reducer
+export const {setIsLoggedIn} = slice.actions
 
 //thunks
 export const login = (data: LoginParamsType): AppThunk => dispatch =>{
