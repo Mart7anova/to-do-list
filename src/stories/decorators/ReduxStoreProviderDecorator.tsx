@@ -38,7 +38,7 @@ export const initialGlobalState: RootStateType = {
     },
     app: {
         error: null,
-        requestStatus: 'succeeded',
+        requestStatus: 'loading',
         isInitialized: true
     },
     auth: {

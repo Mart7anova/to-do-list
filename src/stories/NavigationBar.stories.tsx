@@ -1,6 +1,7 @@
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {ComponentMeta} from '@storybook/react';
 import {NavigationBar} from '../main/NavigationBar';
 import {ReduxStoreProviderDecorator} from './decorators/ReduxStoreProviderDecorator';
+import {ProgressLine} from '../components/ProgressLine';
 
 export default {
     title: 'NavigationBar',
@@ -8,8 +9,7 @@ export default {
     decorators: [ReduxStoreProviderDecorator]
 } as ComponentMeta<typeof NavigationBar>
 
-const Template: ComponentStory<typeof NavigationBar> = () => <NavigationBar/>
-
-export const Base = Template.bind({})
+export const Base = () => <NavigationBar/>
+export const NavBarWithProgressLine = () => <><NavigationBar/><ProgressLine/></>
 
 

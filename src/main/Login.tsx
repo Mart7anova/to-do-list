@@ -17,13 +17,17 @@ import {login} from '../reducers/auth-reducer';
 import {LoginParamsType} from '../api/api';
 import {Navigate} from 'react-router-dom';
 
+type PropsType = {
+    demo?: boolean
+}
+
 type FormikErrorsType = {
     email?: string
     password?: string
     rememberMe?: boolean
 }
 
-export const Login = () => {
+export const Login = ({demo = false}: PropsType) => {
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
 
@@ -53,6 +57,7 @@ export const Login = () => {
     });
 
     if(isLoggedIn){
+        if(demo === false)
         return <Navigate to={'/'}/>
     }
 

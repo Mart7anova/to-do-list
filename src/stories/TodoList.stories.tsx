@@ -11,7 +11,7 @@ export default {
 } as ComponentMeta<typeof TodoList>
 
 const Template: ComponentStory<typeof TodoList> = (args) => <Paper
-    style={{width: '20%', padding: '20px'}}><TodoList {...args}/></Paper>
+    style={{width: '300px', padding: '20px'}}><TodoList {...args}/></Paper>
 
 export const Base = Template.bind({})
 Base.args = {

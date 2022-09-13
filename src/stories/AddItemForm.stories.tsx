@@ -7,7 +7,7 @@ export default {
     component: AddItemForm,
     decorators: [
         (AddItemForm)=>(
-        <div style={{width: '20%'}}><AddItemForm/></div>
+        <div style={{width: '300px'}}><AddItemForm/></div>
     )]
 }as ComponentMeta<typeof AddItemForm>
 
