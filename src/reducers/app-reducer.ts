@@ -2,6 +2,7 @@ import {AppThunk} from '../store/store';
 import {authAPI} from '../api/api';
 import {handleServerNetworkError} from '../utils/error-utils';
 import {setIsLoggedIn} from './auth-reducer';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 const initialState: initialAppStateType = {
     //авторизация пользователя
@@ -12,22 +13,27 @@ const initialState: initialAppStateType = {
     requestStatus: 'idle'
 }
 
-export const appReducer = (state: initialAppStateType = initialState, action: AppActionType): initialAppStateType => {
-    switch (action.type) {
-        case 'SET-IS-INITIALIZED':
-            return {...state, isInitialized: action.value}
-        case 'SET-APP-ERROR':
-            return {...state, error: action.error}
-        case 'SET-REQUEST-STATUS':
-            return {...state, requestStatus: action.value}
-        default:
-            return state
+const slice = createSlice({
+    name: 'app',
+    initialState,
+    reducers: {
+        setIsInitialized(state,action: PayloadAction<boolean>){
+            state.isInitialized = action.payload
+        },
+        setAppError(state,action: PayloadAction<ErrorType>){
+            state.error = action.payload
+        },
+        setRequestStatus(state,action: PayloadAction<RequestStatusType>){
+            state.requestStatus = action.payload
+        },
     }
-}
-//actions
-export const setIsInitialized = (value: boolean) => ({type: 'SET-IS-INITIALIZED', value} as const)
-export const setAppError = (error: ErrorType) => ({type: 'SET-APP-ERROR', error} as const)
-export const setRequestStatus = (value: RequestStatusType) => ({type: 'SET-REQUEST-STATUS', value} as const)
+})
+export const appReducer = slice.reducer
+export const {
+    setIsInitialized,
+    setAppError,
+    setRequestStatus
+} = slice.actions
 
 //thunks
 export const initializeApp = (): AppThunk => dispatch => {
@@ -37,20 +43,15 @@ export const initializeApp = (): AppThunk => dispatch => {
                 dispatch(setIsLoggedIn(true))
             }
         })
-        .catch(e=>{
+        .catch(e => {
             handleServerNetworkError(e, dispatch)
         })
-        .finally(()=>{
+        .finally(() => {
             dispatch(setIsInitialized(true))
         })
 }
 
 //types
-export type AppActionType = ReturnType<typeof setIsInitialized>
-    | ReturnType<typeof setAppError>
-    | ReturnType<typeof setRequestStatus>
-
-export type ErrorStatus = ReturnType<typeof setAppError> | ReturnType<typeof setRequestStatus>
 
 export type initialAppStateType = {
     isInitialized: boolean
