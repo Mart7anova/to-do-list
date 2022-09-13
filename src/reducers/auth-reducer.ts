@@ -58,8 +58,5 @@ export const logout = (): AppThunk => dispatch =>{
         })
 }
 
-//types
-export type AuthActionType = ReturnType<typeof setIsLoggedIn>
 
-export type initialAuthStateType = typeof initialState
 

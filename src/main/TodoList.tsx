@@ -52,7 +52,7 @@ export const TodoList: FC<PropsType> = memo( (props) => {
 
     //filter
     const onChangeFilter = useCallback((filter: FilterValuesType) => {
-        dispatch(changeTodoListFilter(todoList.id, filter))
+        dispatch(changeTodoListFilter({id:todoList.id, filter}))
     },[dispatch, todoList.id])
 
     let tasksForTodolist = tasks[todoList.id]
