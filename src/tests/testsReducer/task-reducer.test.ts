@@ -50,7 +50,7 @@ test('Todo task should be displayed', () => {
         priority: TaskPriorities.Low
     }]
 
-    const endState = taskReducer({'1': []}, setTasks('1', tasks))
+    const endState = taskReducer({'1': []}, setTasks({todoListId:'1', tasks}))
 
     expect(endState['1'].length).toBe(1)
     expect(endState['1'][0].id).toBe('one')
@@ -77,7 +77,7 @@ test('A new task should be added', () => {
 })
 
 test('The task should be deleted', () => {
-    const endState = taskReducer(startState, removeTask('1','one'))
+    const endState = taskReducer(startState, removeTask({todoListId:'1',taskId:'one'}))
 
     expect(endState['1'].length).toBe(0)
 })
@@ -96,7 +96,7 @@ test('The todo list should to be changed', () => {
         priority: TaskPriorities.Low
     }
 
-    const endState = taskReducer(startState, changeTask('1','one', newTitle))
+    const endState = taskReducer(startState, changeTask({todoListId:'1',taskId:'one', model:newTitle}))
 
     expect(endState['1'][0].title).toBe('Test changes')
 })

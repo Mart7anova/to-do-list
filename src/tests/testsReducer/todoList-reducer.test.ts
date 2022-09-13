@@ -41,7 +41,7 @@ test('The todo list should be deleted', () => {
 test('The todo list should to be changed', () => {
     const newTitle = 'Test title'
 
-    const endState = todoListReducer(startState, changeTodoListTitle('1', newTitle))
+    const endState = todoListReducer(startState, changeTodoListTitle({id:'1', title:newTitle}))
 
     expect(endState.length).toBe(2)
     expect(endState[0].title).toBe('Test title')
@@ -49,7 +49,7 @@ test('The todo list should to be changed', () => {
 test('The filter should to be changed', () => {
     const newFilter:FilterValuesType = 'completed'
 
-    const endState = todoListReducer(startState, changeTodoListFilter('1', newFilter))
+    const endState = todoListReducer(startState, changeTodoListFilter({id:'1', filter:newFilter}))
 
     expect(endState.length).toBe(2)
     expect(endState[0].filter).toBe('completed')
