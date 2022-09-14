@@ -1,9 +1,9 @@
 import React, {FC, memo, useCallback, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
-import {createTask, deleteTask, fetchTasks, ModelType, updateTask} from '../reducers/task-reducer';
+import {createTask, deleteTask, fetchTasks, ModelType, updateTask} from '../store/reducers/task-reducer';
 import {Task} from './Task';
-import {AddItemForm} from '../components/AddItemForm';
-import {EditableSpan} from '../components/EditableSpan';
+import {AddItemForm} from './common/AddItemForm';
+import {EditableSpan} from './common/EditableSpan';
 import CloseIcon from '@material-ui/icons/Close';
 import {
     changeTodoListFilter,
@@ -11,7 +11,7 @@ import {
     FilterValuesType,
     TodoListStateType,
     updateTodoList
-} from '../reducers/todoList-reducer';
+} from '../store/reducers/todoList-reducer';
 import style from './styles/TodoList.module.scss';
 import {Button, ButtonGroup, Grid} from '@material-ui/core';
 import {TaskStatuses} from '../api/api';

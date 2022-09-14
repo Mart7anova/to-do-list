@@ -1,6 +1,6 @@
 import {ComponentMeta} from '@storybook/react';
 import {ReduxStoreProviderDecorator} from './decorators/ReduxStoreProviderDecorator';
-import App from '../main/App';
+import App from '../App';
 import { withRouter } from 'storybook-addon-react-router-v6';
 
 export default {

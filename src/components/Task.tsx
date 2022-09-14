@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, memo} from 'react';
-import {EditableSpan} from '../components/EditableSpan';
+import {EditableSpan} from './common/EditableSpan';
 import {TaskStatuses, TaskType} from '../api/api';
-import {ModelType} from '../reducers/task-reducer';
+import {ModelType} from '../store/reducers/task-reducer';
 import {Checkbox, Grid, withStyles} from '@material-ui/core';
 import {CheckCircleOutline, RadioButtonUnchecked} from '@material-ui/icons';
 import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';

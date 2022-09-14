@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './styles/App.module.scss';
+import style from '../App.module.scss';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import {TodoLists} from './TodoLists';
 import {PageNotFound} from './PageNotFound';

@@ -1,6 +1,6 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {ReduxStoreProviderDecorator} from './decorators/ReduxStoreProviderDecorator';
-import {TodoList} from '../main/TodoList';
+import {TodoList} from '../components/TodoList';
 import {Paper} from '@material-ui/core';
 
 

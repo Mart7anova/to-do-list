@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {fetchTodoLists} from '../reducers/todoList-reducer';
+import {fetchTodoLists} from '../store/reducers/todoList-reducer';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import {TodoList} from './TodoList';
 import {Grid, Paper} from '@material-ui/core';

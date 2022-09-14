@@ -1,6 +1,6 @@
-import {AppThunk} from '../store/store';
-import {authAPI, LoginParamsType} from '../api/api';
-import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
+import {AppThunk} from '../store';
+import {authAPI, LoginParamsType} from '../../api/api';
+import {handleServerAppError, handleServerNetworkError} from '../../utils/error-utils';
 import {setRequestStatus} from './app-reducer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 

@@ -1,4 +1,4 @@
-import {Login} from '../main/Login'
+import {Login} from '../components/Login'
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {ReduxStoreProviderDecorator} from './decorators/ReduxStoreProviderDecorator';
 import {withRouter} from 'storybook-addon-react-router-v6';

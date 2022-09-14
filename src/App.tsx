@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import {NavigationBar} from './NavigationBar';
-import {useAppDispatch, useAppSelector} from '../hooks/hooks';
-import {Loading} from '../components/Loading';
-import {initializeApp} from '../reducers/app-reducer';
-import {ErrorSnackbar} from '../components/ErrorSnackbar';
-import style from './styles/App.module.scss'
-import background from '../common/photo/background.jpg'
-import {RoutesApp} from './RoutesApp';
+import {NavigationBar} from './components/NavigationBar';
+import {useAppDispatch, useAppSelector} from './hooks/hooks';
+import {Loading} from './components/common/Loading';
+import {initializeApp} from './store/reducers/app-reducer';
+import {ErrorSnackbar} from './components/common/ErrorSnackbar';
+import style from './App.module.scss'
+import background from './assets/photo/background.jpg'
+import {RoutesApp} from './components/RoutesApp';
 
 type PropsType = {
     demo?: boolean

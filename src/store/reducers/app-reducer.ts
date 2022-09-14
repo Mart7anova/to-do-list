@@ -1,6 +1,5 @@
-import {AppThunk} from '../store/store';
-import {authAPI} from '../api/api';
-import {handleServerNetworkError} from '../utils/error-utils';
+import {authAPI} from '../../api/api';
+import {handleServerNetworkError} from '../../utils/error-utils';
 import {setIsLoggedIn} from './auth-reducer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
@@ -26,7 +25,12 @@ const slice = createSlice({
         setRequestStatus(state,action: PayloadAction<RequestStatusType>){
             state.requestStatus = action.payload
         },
-    }
+    }/*,
+    extraReducers:(builder)=>{
+        builder.addCase(initializeApp.fulfilled, (state, action)=>{
+            state.isInitialized = true
+        })
+    }*/
 })
 export const appReducer = slice.reducer
 export const {
@@ -36,7 +40,14 @@ export const {
 } = slice.actions
 
 //thunks
-export const initializeApp = (): AppThunk => dispatch => {
+/*const initializeApp =createAsyncThunk(
+    'app/initializeApp',
+    async ()=>{
+        const res = await authAPI.me()
+        return res.data
+    }
+)*/
+export const initializeApp = ()  => dispatch => {
     authAPI.me()
         .then(res => {
             if (res.data.resultCode === 0) {
@@ -52,7 +63,6 @@ export const initializeApp = (): AppThunk => dispatch => {
 }
 
 //types
-
 export type initialAppStateType = {
     isInitialized: boolean
     error: ErrorType

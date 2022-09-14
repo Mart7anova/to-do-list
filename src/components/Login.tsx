@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import style from './styles/Login.module.scss';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
-import {login} from '../reducers/auth-reducer';
+import {login} from '../store/reducers/auth-reducer';
 import {LoginParamsType} from '../api/api';
 import {Navigate} from 'react-router-dom';
 

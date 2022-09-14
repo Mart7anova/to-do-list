@@ -1,4 +1,4 @@
-import {PageNotFound} from '../main/PageNotFound'
+import {PageNotFound} from '../components/PageNotFound'
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 
 export default {
