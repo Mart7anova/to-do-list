@@ -1,5 +1,11 @@
 import {TaskPriorities, TaskStatuses, TaskType} from '../../api/api';
-import {addTask, changeTask, removeTask, setTasks, taskReducer, TasksStateType} from '../../store/reducers/task-reducer';
+import {
+    createTask,
+    deleteTask,
+    fetchTasks,
+    taskReducer,
+    TasksStateType, updateTask
+} from '../../store/reducers/task-reducer';
 
 let startState: TasksStateType = {}
 
@@ -50,7 +56,7 @@ test('Todo task should be displayed', () => {
         priority: TaskPriorities.Low
     }]
 
-    const endState = taskReducer({'1': []}, setTasks({todoListId:'1', tasks}))
+    const endState = taskReducer({'1': []}, fetchTasks.fulfilled({todoListId: '1', tasks}, 'requestID', '1'))
 
     expect(endState['1'].length).toBe(1)
     expect(endState['1'][0].id).toBe('one')
@@ -70,14 +76,18 @@ test('A new task should be added', () => {
         priority: TaskPriorities.Low
     }
 
-    const endState = taskReducer(startState, addTask(newTask))
+    const endState = taskReducer(startState, createTask.fulfilled(newTask, 'requestID', {
+        title: newTask.title,
+        todoListId: newTask.todoListId
+    }))
 
     expect(endState['2'].length).toBe(2)
     expect(endState['2'][0].title).toBe('Test Task')
 })
 
 test('The task should be deleted', () => {
-    const endState = taskReducer(startState, removeTask({todoListId:'1',taskId:'one'}))
+    let param = {todoListId: '1', taskId: 'one'};
+    const endState = taskReducer(startState, deleteTask.fulfilled(param, 'requestID', param))
 
     expect(endState['1'].length).toBe(0)
 })
@@ -96,7 +106,13 @@ test('The todo list should to be changed', () => {
         priority: TaskPriorities.Low
     }
 
-    const endState = taskReducer(startState, changeTask({todoListId:'1',taskId:'one', model:newTitle}))
+    const endState = taskReducer(startState,
+        updateTask.fulfilled(
+            {todoListId: '1', taskId: 'one', model: newTitle},
+            'requestID',
+            {todoListId: '1', taskId: 'one', model: newTitle}
+        )
+    )
 
     expect(endState['1'][0].title).toBe('Test changes')
 })
