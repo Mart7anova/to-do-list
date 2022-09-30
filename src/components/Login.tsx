@@ -1,5 +1,5 @@
 import React from 'react';
-import {useFormik} from 'formik';
+import {FormikHelpers, useFormik} from 'formik';
 import {
     Button,
     Checkbox,
@@ -12,10 +12,11 @@ import {
     TextField
 } from '@material-ui/core';
 import style from './styles/Login.module.scss';
-import {useAppDispatch, useAppSelector} from '../hooks/hooks';
+import {useAppDispatch} from '../hooks/useAppDispatch';
 import {login} from '../store/reducers/auth-reducer';
 import {LoginParamsType} from '../api/api';
 import {Navigate} from 'react-router-dom';
+import {useAppSelector} from '../hooks/useAppSelector';
 
 type PropsType = {
     demo?: boolean
@@ -41,9 +42,9 @@ export const Login = ({demo = false}: PropsType) => {
             const errors: FormikErrorsType = {}
             if (!values.email) {
                 errors.email = 'email required'
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            } /*else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
-            }
+            }*/
             if (!values.password) {
                 errors.password = 'password required';
             } else if (values.password.length < 3) {
@@ -51,8 +52,14 @@ export const Login = ({demo = false}: PropsType) => {
             }
             return errors
         },
-        onSubmit: (values: LoginParamsType) => {
-            dispatch(login(values))
+        onSubmit: async (values: LoginParamsType, formikHelpers: FormikHelpers<LoginParamsType>) => {
+            const res = await dispatch(login(values))
+            if(login.rejected.match(res)){
+                if(res.payload?.fieldsErrors?.length){
+                    const error = res.payload?.fieldsErrors[0]
+                    formikHelpers.setFieldError(error.field, error.error)
+                }
+            }
         },
     });
 
