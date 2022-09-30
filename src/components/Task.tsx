@@ -4,7 +4,8 @@ import {TaskStatuses, TaskType} from '../api/api';
 import {ModelType} from '../store/reducers/task-reducer';
 import {Checkbox, Grid, withStyles} from '@material-ui/core';
 import {CheckCircleOutline, RadioButtonUnchecked} from '@material-ui/icons';
-import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
+import HighlightOff from '@material-ui/icons/HighlightOffRounded';
+import Cancel from '@material-ui/icons/Cancel';
 import style from './styles/Task.module.scss'
 import {green} from '@material-ui/core/colors';
 
@@ -44,14 +45,14 @@ export const Task: FC<PropsType> = memo((props) => {
                       onChange={onChangeStatus}
             />
             <EditableSpan value={task.title} onChange={onChangeTitle}/>
-            <Checkbox icon={<HighlightOffRoundedIcon/>}
+            <Checkbox icon={<HighlightOff/>}
+                      checkedIcon={<Cancel/>}
                       onClick={removeHandler}
                       size={'medium'}
                       color={'default'}
             />
-</Grid>
-)
-    ;
+        </Grid>
+    );
 });
 
 const GreenCheckbox = withStyles({

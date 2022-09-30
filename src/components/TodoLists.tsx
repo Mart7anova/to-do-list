@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import {fetchTodoLists} from '../store/reducers/todoList-reducer';
-import {useAppDispatch, useAppSelector} from '../hooks/hooks';
+import {useAppDispatch} from '../hooks/useAppDispatch';
 import {TodoList} from './TodoList';
 import {Grid, Paper} from '@material-ui/core';
 import {Navigate} from 'react-router-dom';
 import style from './styles/TodoLists.module.scss'
+import {useAppSelector} from '../hooks/useAppSelector';
 
 export const TodoLists = () => {
     const todoLists = useAppSelector(state => state.todoList)
