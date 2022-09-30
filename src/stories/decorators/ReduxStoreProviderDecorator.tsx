@@ -2,20 +2,20 @@ import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {TaskPriorities, TaskStatuses} from '../../api/api';
-import {RootSReducerType, RootStateType} from '../../store/store';
+import {AppRootStateType} from '../../store/store';
 import {appReducer} from '../../store/reducers/app-reducer';
 import {authReducer} from '../../store/reducers/auth-reducer';
 import {todoListReducer} from '../../store/reducers/todoList-reducer';
 import {taskReducer} from '../../store/reducers/task-reducer';
 
-const rootReducer:RootSReducerType = combineReducers({
+const rootReducer = combineReducers({
     app:appReducer,
     auth: authReducer,
     todoList: todoListReducer,
     task: taskReducer
 })
 
-export const initialGlobalState: RootStateType = {
+export const initialGlobalState: AppRootStateType = {
     todoList: [
         {id: "todolistId1", title: "What to learn", filter: "all", addedDate: '', order: 0},
         {id: "todolistId2", title: "What to buy", filter: "all", addedDate: '', order: -1},
