@@ -1,73 +1,54 @@
 import {authAPI} from '../../api/api';
 import {handleServerNetworkError} from '../../utils/error-utils';
 import {setIsLoggedIn} from './auth-reducer';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {AxiosError} from 'axios';
 
-const initialState: initialAppStateType = {
-    //авторизация пользователя
-    isInitialized: false,
-    //глобальная ошибка (например: некорр запрос)
-    error: null,
-    //статус при взаимодействии с сервером
-    requestStatus: 'idle'
-}
+
+export const initializeApp = createAsyncThunk('app/initializeApp', async (param, thunkAPI) => {
+    try {
+        const res = await authAPI.me()
+        if (res.data.resultCode === 0) {
+            thunkAPI.dispatch(setIsLoggedIn(true))
+        }
+    } catch (e) {
+        const error = e as Error | AxiosError<{error: string}>
+        handleServerNetworkError(error, thunkAPI.dispatch)
+        return thunkAPI.rejectWithValue({})
+    }
+})
+
 
 const slice = createSlice({
     name: 'app',
-    initialState,
+    initialState: {
+        isInitialized: false,
+        error: null as ErrorType,
+        requestStatus: 'idle' as RequestStatusType,
+    },
     reducers: {
-        setIsInitialized(state,action: PayloadAction<boolean>){
-            state.isInitialized = action.payload
-        },
-        setAppError(state,action: PayloadAction<ErrorType>){
+        setAppError(state, action: PayloadAction<ErrorType>) {
             state.error = action.payload
         },
-        setRequestStatus(state,action: PayloadAction<RequestStatusType>){
+        setRequestStatus(state, action: PayloadAction<RequestStatusType>) {
             state.requestStatus = action.payload
         },
-    }/*,
+    },
     extraReducers:(builder)=>{
-        builder.addCase(initializeApp.fulfilled, (state, action)=>{
+        builder.addCase(initializeApp.fulfilled, (state)=>{
             state.isInitialized = true
         })
-    }*/
+    }
 })
+
 export const appReducer = slice.reducer
 export const {
-    setIsInitialized,
     setAppError,
     setRequestStatus
 } = slice.actions
 
-//thunks
-/*const initializeApp =createAsyncThunk(
-    'app/initializeApp',
-    async ()=>{
-        const res = await authAPI.me()
-        return res.data
-    }
-)*/
-export const initializeApp = ()  => dispatch => {
-    authAPI.me()
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(setIsLoggedIn(true))
-            }
-        })
-        .catch(e => {
-            handleServerNetworkError(e, dispatch)
-        })
-        .finally(() => {
-            dispatch(setIsInitialized(true))
-        })
-}
 
 //types
-export type initialAppStateType = {
-    isInitialized: boolean
-    error: ErrorType
-    requestStatus: RequestStatusType
-}
-type ErrorType = null | string
+export type ErrorType = null | string
 
-type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

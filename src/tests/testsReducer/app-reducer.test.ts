@@ -1,15 +1,13 @@
 import {
-    appReducer,
-    initialAppStateType,
+    appReducer, ErrorType, initializeApp, RequestStatusType,
     setAppError,
-    setIsInitialized,
     setRequestStatus
 } from '../../store/reducers/app-reducer';
 
-let startState:initialAppStateType = {
+let startState = {
     isInitialized: false,
-    error: null,
-    requestStatus: 'idle'
+    error: null as ErrorType,
+    requestStatus: 'idle' as RequestStatusType,
 }
 
 beforeEach(() => {
@@ -21,7 +19,7 @@ beforeEach(() => {
 })
 
 test('Authorization must be completed', () => {
-    const endState = appReducer(startState, setIsInitialized(true))
+    const endState = appReducer(startState, initializeApp.fulfilled(undefined, 'requestID', undefined))
 
     expect(endState.isInitialized).toBe(true)
 })
