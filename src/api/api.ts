@@ -50,9 +50,13 @@ export const taskAPI = {
     }
 }
 
+//types
+export type FieldErrorsType = Array<{ field: string, error: string }>;
+
 export type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
+    fieldsErrors?: FieldErrorsType
     data: D
 }
 
