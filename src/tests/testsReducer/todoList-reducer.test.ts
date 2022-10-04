@@ -1,10 +1,12 @@
 import {
-    addTodoList, changeTodoListFilter,
-    changeTodoListTitle, FilterValuesType,
-    removeTodoList,
-    setTodoLists,
+    changeTodoListFilter,
+    createTodoList,
+    deleteTodoList,
+    fetchTodoLists,
+    FilterValuesType,
     todoListReducer,
-    TodoListStateType
+    TodoListStateType,
+    updateTodoListTitle
 } from '../../store/reducers/todoList-reducer';
 
 let startState: TodoListStateType[] = []
@@ -17,7 +19,7 @@ beforeEach(() => {
 })
 
 test('Todo lists should be displayed', () => {
-    const endState = todoListReducer([], setTodoLists(startState))
+    const endState = todoListReducer([], fetchTodoLists.fulfilled(startState, 'requestID'))
 
     expect(endState.length).toBe(2)
 })
@@ -25,23 +27,23 @@ test('Todo lists should be displayed', () => {
 test('A new todo list should be added', () => {
     const newTodoList = {id: '3', title: 'Test todo list', addedDate: '16.08.2022', order: -2}
 
-    const endState = todoListReducer(startState, addTodoList(newTodoList))
+    const endState = todoListReducer(startState, createTodoList.fulfilled(newTodoList, 'requestID', newTodoList.title))
 
     expect(endState.length).toBe(3)
     expect(endState[0].title).toBe('Test todo list')
 })
 
 test('The todo list should be deleted', () => {
-    const endState = todoListReducer(startState, removeTodoList('1'))
+    const endState = todoListReducer(startState, deleteTodoList.fulfilled('1', 'requestID', '1'))
 
     expect(endState.length).toBe(1)
     expect(endState[0].id).toBe('2')
 })
 
 test('The todo list should to be changed', () => {
-    const newTitle = 'Test title'
+    const data = {id:'1', title: 'Test title'}
 
-    const endState = todoListReducer(startState, changeTodoListTitle({id:'1', title:newTitle}))
+    const endState = todoListReducer(startState, updateTodoListTitle.fulfilled(data, 'requestID', data))
 
     expect(endState.length).toBe(2)
     expect(endState[0].title).toBe('Test title')

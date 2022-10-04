@@ -2,7 +2,7 @@ import {taskAPI, TaskPriorities, TaskStatuses, TaskType, UpdateTaskModelType} fr
 import {handleServerAppError, handleServerNetworkError} from '../../utils/error-utils';
 import {setRequestStatus} from './app-reducer';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {addTodoList, removeTodoList, setTodoLists} from './todoList-reducer';
+import {createTodoList, fetchTodoLists, deleteTodoList} from './todoList-reducer';
 import {AxiosError} from 'axios';
 import {AppRootStateType} from '../store';
 
@@ -121,13 +121,13 @@ const slice = createSlice({
         })
 
         //todoList
-        builder.addCase(setTodoLists, (state, action) => {
+        builder.addCase(fetchTodoLists.fulfilled, (state, action) => {
             action.payload.forEach(s => state[s.id] = [])
         })
-        builder.addCase(addTodoList, (state, action) => {
+        builder.addCase(createTodoList.fulfilled, (state, action) => {
             state[action.payload.id] = []
         })
-        builder.addCase(removeTodoList, (state, action) => {
+        builder.addCase(deleteTodoList.fulfilled, (state, action) => {
             delete state[action.payload]
         })
     }
