@@ -9,4 +9,4 @@ export default {
     decorators: [ReduxStoreProviderDecorator, withRouter]
 } as ComponentMeta<typeof App>
 
-export const AppToDoList = () => <App demo={true}/>
+export const AppToDoList = () => <App/>

@@ -1,4 +1,5 @@
 import * as taskSelectors from './selectors'
+import { Task } from './Task';
 import {asyncActions, slice} from './task-reducer';
 
 const taskReducer = slice.reducer
@@ -12,4 +13,5 @@ export {
     taskReducer,
     taskActions,
     taskSelectors,
+    Task,
 }
