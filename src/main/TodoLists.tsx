@@ -1,15 +1,16 @@
 import React, {useEffect} from 'react';
-import {fetchTodoLists} from '../reducers/todoList-reducer';
-import {useAppDispatch, useAppSelector} from '../hooks/hooks';
+import {useAppSelector} from '../hooks/hooks';
 import {TodoList} from './TodoList';
 import {Grid, Paper} from '@material-ui/core';
 import {Navigate} from 'react-router-dom';
 import style from './styles/TodoLists.module.scss'
+import {fetchTodoLists} from "../store/sagas/todoList-sagas";
+import {useDispatch} from "react-redux";
 
 export const TodoLists = () => {
     const todoLists = useAppSelector(state => state.todoList)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchTodoLists())

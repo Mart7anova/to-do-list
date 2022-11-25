@@ -12,10 +12,11 @@ import {
     TextField
 } from '@material-ui/core';
 import style from './styles/Login.module.scss';
-import {useAppDispatch, useAppSelector} from '../hooks/hooks';
-import {login} from '../reducers/auth-reducer';
+import {useAppSelector} from '../hooks/hooks';
 import {LoginParamsType} from '../api/api';
 import {Navigate} from 'react-router-dom';
+import {login} from "../store/sagas/auth-sagas";
+import {useDispatch} from "react-redux";
 
 type PropsType = {
     demo?: boolean
@@ -29,14 +30,14 @@ type FormikErrorsType = {
 
 export const Login = ({demo = false}: PropsType) => {
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
             rememberMe: false
-        }as LoginParamsType,
+        } as LoginParamsType,
         validate: values => {
             const errors: FormikErrorsType = {}
             if (!values.email) {
@@ -56,9 +57,9 @@ export const Login = ({demo = false}: PropsType) => {
         },
     });
 
-    if(isLoggedIn){
-        if(demo === false)
-        return <Navigate to={'/'}/>
+    if (isLoggedIn) {
+        if (demo === false)
+            return <Navigate to={'/'}/>
     }
 
     return (

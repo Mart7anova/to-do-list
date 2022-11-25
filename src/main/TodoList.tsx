@@ -1,20 +1,18 @@
 import React, {FC, memo, useCallback, useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from '../hooks/hooks';
-import {createTask, deleteTask, fetchTasks, ModelType, updateTask} from '../reducers/task-reducer';
+import {useAppSelector} from '../hooks/hooks';
+import {ModelType} from '../store/reducers/task-reducer';
 import {Task} from './Task';
 import {AddItemForm} from '../components/AddItemForm';
 import {EditableSpan} from '../components/EditableSpan';
 import CloseIcon from '@material-ui/icons/Close';
-import {
-    changeTodoListFilter,
-    deleteTodoList,
-    FilterValuesType,
-    TodoListStateType,
-    updateTodoList
-} from '../reducers/todoList-reducer';
+import {changeTodoListFilter, FilterValuesType, TodoListStateType,} from '../store/reducers/todoList-reducer';
 import style from './styles/TodoList.module.scss';
 import {Button, ButtonGroup, Grid} from '@material-ui/core';
 import {TaskStatuses} from '../api/api';
+import {useDispatch} from "react-redux";
+import {createTask, deleteTask, fetchTasks, updateTask} from "../store/sagas/task-sagas";
+import {getTasks} from "../store/selectors/task-selectors";
+import {deleteTodoList, updateTodoList} from "../store/sagas/todoList-sagas";
 
 type PropsType = {
     todoList: TodoListStateType
@@ -25,8 +23,8 @@ export const TodoList: FC<PropsType> = memo( (props) => {
         todoList,
     } = props
 
-    const tasks = useAppSelector(state => state.task)
-    const dispatch = useAppDispatch()
+    const tasks = useAppSelector(getTasks)
+    const dispatch = useDispatch()
 
     //todoList
     const changeTodoListTitle = useCallback((title: string) => {

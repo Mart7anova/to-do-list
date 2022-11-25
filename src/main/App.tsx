@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
 import {NavigationBar} from './NavigationBar';
-import {useAppDispatch, useAppSelector} from '../hooks/hooks';
+import {useAppSelector} from '../hooks/hooks';
 import {Loading} from '../components/Loading';
-import {initializeApp} from '../reducers/app-reducer';
 import {ErrorSnackbar} from '../components/ErrorSnackbar';
 import style from './styles/App.module.scss'
 import background from '../common/photo/background.jpg'
 import {RoutesApp} from './RoutesApp';
+import {useDispatch} from "react-redux";
+import {initializeApp} from "../store/sagas/app-sagas";
 
 type PropsType = {
     demo?: boolean
@@ -18,7 +19,7 @@ function App({demo = false}: PropsType) {
     }
 
     const isInitialized = useAppSelector(state => state.app.isInitialized)
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(initializeApp())

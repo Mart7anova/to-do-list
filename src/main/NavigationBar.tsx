@@ -1,15 +1,16 @@
 import React, {useCallback} from 'react';
 import {AppBar, Button, Toolbar} from '@material-ui/core';
 import style from './styles/NavigationBar.module.scss'
-import {useAppDispatch, useAppSelector} from '../hooks/hooks';
-import {logout} from '../reducers/auth-reducer';
+import {useAppSelector} from '../hooks/hooks';
 import {AddItemForm} from '../components/AddItemForm';
-import {createTodoList} from '../reducers/todoList-reducer';
 import {ProgressLine} from '../components/ProgressLine';
+import {createTodoList} from "../store/sagas/todoList-sagas";
+import {useDispatch} from "react-redux";
+import {logout} from "../store/sagas/auth-sagas";
 
 export const NavigationBar = () => {
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
 
     const addTodoList = useCallback((title: string) => {
         dispatch(createTodoList(title))

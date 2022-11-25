@@ -2,13 +2,13 @@ import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {TaskPriorities, TaskStatuses} from '../../api/api';
-import {RootSReducerType, RootStateType} from '../../store/store';
-import {appReducer} from '../../reducers/app-reducer';
-import {authReducer} from '../../reducers/auth-reducer';
-import {todoListReducer} from '../../reducers/todoList-reducer';
-import {taskReducer} from '../../reducers/task-reducer';
+import {RootReducerType, RootStateType} from '../../store/store';
+import {appReducer} from '../../store/reducers/app-reducer';
+import {authReducer} from '../../store/reducers/auth-reducer';
+import {todoListReducer} from '../../store/reducers/todoList-reducer';
+import {taskReducer} from '../../store/reducers/task-reducer';
 
-const rootReducer:RootSReducerType = combineReducers({
+const rootReducer:RootReducerType = combineReducers({
     app:appReducer,
     auth: authReducer,
     todoList: todoListReducer,
