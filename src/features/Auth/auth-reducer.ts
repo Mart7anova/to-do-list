@@ -17,7 +17,7 @@ const login = createAsyncThunk<undefined, LoginParamsType, { rejectValue: { erro
         }
     } catch (e) {
         const error = e as Error | AxiosError<{ error: string }>
-        handleServerNetworkError(error, thunkAPI.dispatch)
+        //handleServerNetworkError(error, thunkAPI.dispatch)
         return thunkAPI.rejectWithValue({errors: [error.message], fieldsErrors: undefined})
     } finally {
         thunkAPI.dispatch(appActions.setAppStatus({status:'succeeded'}))
