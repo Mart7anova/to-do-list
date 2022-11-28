@@ -19,7 +19,6 @@ export function* loginWS({dataForLogin}: ReturnType<typeof login>) {
         if (data.resultCode === 0) {
             yield put(setIsLoggedIn(true))
         } else {
-            // @ts-ignore
             yield put(handleServerAppError(data))
         }
     } catch (e) {
