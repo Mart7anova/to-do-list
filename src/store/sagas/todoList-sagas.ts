@@ -5,7 +5,6 @@ import {handleServerAppError, handleServerNetworkError} from "../../utils/error-
 import {addTodoList, changeTodoListTitle, removeTodoList, setTodoLists} from "../reducers/todoList-reducer";
 import {call, put, takeEvery} from "redux-saga/effects";
 import {ServerNetworkError} from "../../common/types/ServerNetworkError";
-import {AxiosResponse} from "axios";
 
 export const fetchTodoLists = () => ({type: 'TODOLIST/FETCH-TODO-LIST'})
 export const createTodoList = (title: string) => ({type: 'TODOLIST/CREATE-TODO-LIST', title})
@@ -16,7 +15,7 @@ export const updateTodoList = (id: string, title: string) => ({type: 'TODOLIST/U
 export function* fetchTodoListsWS() {
     yield put(setRequestStatus('loading'))
     try {
-        const {data}: AxiosResponse<TodoListType[]> = yield call(todoListAPI.getTodoLists)
+        const data: TodoListType[] = yield call(todoListAPI.getTodoLists)
         yield put(setTodoLists(data))
     } catch (e) {
         yield put(handleServerNetworkError(e as ServerNetworkError))
@@ -28,7 +27,7 @@ export function* fetchTodoListsWS() {
 export function* createTodoListWS({title}: ReturnType<typeof createTodoList>) {
     yield put(setRequestStatus('loading'))
     try {
-        const {data}: AxiosResponse<ResponseType<{ item: TodoListType }>> = yield call(todoListAPI.createTodoList, title)
+        const data: ResponseType<{ item: TodoListType }> = yield call(todoListAPI.createTodoList, title)
 
         if (data.resultCode === 0) {
             yield put(addTodoList(data.data.item))
@@ -45,7 +44,7 @@ export function* createTodoListWS({title}: ReturnType<typeof createTodoList>) {
 export function* deleteTodoListWS({id}: ReturnType<typeof deleteTodoList>) {
     yield put(setRequestStatus('loading'))
     try {
-        const {data}: AxiosResponse<ResponseType> = yield call(todoListAPI.deleteTodoList, id)
+        const data: ResponseType = yield call(todoListAPI.deleteTodoList, id)
         if (data.resultCode === 0) {
             yield put(removeTodoList(id))
         } else {
@@ -61,7 +60,7 @@ export function* deleteTodoListWS({id}: ReturnType<typeof deleteTodoList>) {
 export function* updateTodoListWS({id, title}: ReturnType<typeof updateTodoList>) {
     yield put(setRequestStatus('loading'))
     try {
-        const {data}: AxiosResponse<ResponseType> = yield call(todoListAPI.updateTodoList, id, title)
+        const data: ResponseType = yield call(todoListAPI.updateTodoList, id, title)
         if (data.resultCode === 0) {
             yield put(changeTodoListTitle(id, title))
         } else {

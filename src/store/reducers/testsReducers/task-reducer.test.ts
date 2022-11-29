@@ -1,5 +1,5 @@
-import {TaskPriorities, TaskStatuses, TaskType} from '../../api/api';
-import {addTask, changeTask, removeTask, setTasks, taskReducer, TasksStateType} from '../../store/reducers/task-reducer';
+import {TaskPriorities, TaskStatuses, TaskType} from '../../../api/api';
+import {addTask, changeTask, removeTask, setTasks, taskReducer, TasksStateType} from '../task-reducer';
 
 let startState: TasksStateType = {}
 

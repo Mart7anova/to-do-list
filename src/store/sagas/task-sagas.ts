@@ -1,6 +1,5 @@
 import {call, put, select, takeEvery} from "redux-saga/effects";
 import {setRequestStatus} from "../reducers/app-reducer";
-import {AxiosResponse} from "axios";
 import {ResponseTasksType, ResponseType, taskAPI, TaskType, UpdateTaskModelType} from "../../api/api";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 import {ServerNetworkError} from "../../common/types/ServerNetworkError";
@@ -22,7 +21,8 @@ export const updateTask = (todoListId: string, taskId: string, changes: ModelTyp
 export function* fetchTasksWS({todoListId}: ReturnType<typeof fetchTasks>) {
     yield put(setRequestStatus('loading'))
     try {
-        const {data}: AxiosResponse<ResponseTasksType> = yield call(taskAPI.getTasks, todoListId)
+        const data: ResponseTasksType = yield call(taskAPI.getTasks, todoListId)
+
         if (data.error === null) {
             yield put(setTasks(todoListId, data.items))
         }
@@ -36,7 +36,7 @@ export function* fetchTasksWS({todoListId}: ReturnType<typeof fetchTasks>) {
 export function* createTaskWS({todoListId, title}: ReturnType<typeof createTask>) {
     yield put(setRequestStatus('loading'))
     try {
-        const {data}: AxiosResponse<ResponseType<{ item: TaskType }>> = yield call(taskAPI.createTask, todoListId, title)
+        const data: ResponseType<{ item: TaskType }> = yield call(taskAPI.createTask, todoListId, title)
 
         if (data.resultCode === 0) {
             yield put(addTask(data.data.item))
@@ -53,7 +53,7 @@ export function* createTaskWS({todoListId, title}: ReturnType<typeof createTask>
 export function* deleteTaskWS({todoListId, taskId}: ReturnType<typeof deleteTask>) {
     yield put(setRequestStatus('loading'))
     try {
-        const {data}: AxiosResponse<ResponseType> = yield call(taskAPI.deleteTask, todoListId, taskId)
+        const data: ResponseType = yield call(taskAPI.deleteTask, todoListId, taskId)
 
         if (data.resultCode === 0) {
             yield put(removeTask(todoListId, taskId))
@@ -84,7 +84,7 @@ export function* updateTaskWS({todoListId, taskId, changes}: ReturnType<typeof u
     yield put(setRequestStatus('loading'))
 
     try {
-        const {data}: AxiosResponse<ResponseType<{ item: TaskType }>> = yield call(taskAPI.updateTask, todoListId, taskId, model)
+        const data: ResponseType<{ item: TaskType }> = yield call(taskAPI.updateTask, todoListId, taskId, model)
         if (data.resultCode === 0) {
             yield put(changeTask(todoListId, taskId, model))
         } else {

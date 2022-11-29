@@ -4,7 +4,6 @@ import {setRequestStatus} from "../reducers/app-reducer";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 import {setIsLoggedIn} from "../reducers/auth-reducer";
 import {ServerNetworkError} from "../../common/types/ServerNetworkError";
-import {AxiosResponse} from "axios";
 
 //actions
 export const login = (dataForLogin: LoginParamsType) => ({type: 'AUTH/LOGIN', dataForLogin})
@@ -15,7 +14,7 @@ export const logout = () => ({type: 'AUTH/LOGOUT'})
 export function* loginWS({dataForLogin}: ReturnType<typeof login>) {
     yield put(setRequestStatus('loading'))
     try {
-        const {data}: AxiosResponse<ResponseType<{ userId: number }>> = yield call(authAPI.login, dataForLogin)
+        const data: ResponseType<{ userId: number }> = yield call(authAPI.login, dataForLogin)
         if (data.resultCode === 0) {
             yield put(setIsLoggedIn(true))
         } else {
@@ -31,7 +30,7 @@ export function* loginWS({dataForLogin}: ReturnType<typeof login>) {
 export function* logoutWS() {
     yield put(setRequestStatus('loading'))
     try {
-        const {data}: AxiosResponse<ResponseType> = yield call(authAPI.logout)
+        const data: ResponseType = yield call(authAPI.logout)
         if (data.resultCode === 0) {
             yield put(setIsLoggedIn(false))
         } else {

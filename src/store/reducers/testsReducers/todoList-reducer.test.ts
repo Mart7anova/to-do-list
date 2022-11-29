@@ -5,7 +5,7 @@ import {
     setTodoLists,
     todoListReducer,
     TodoListStateType
-} from '../../store/reducers/todoList-reducer';
+} from '../todoList-reducer';
 
 let startState: TodoListStateType[] = []
 

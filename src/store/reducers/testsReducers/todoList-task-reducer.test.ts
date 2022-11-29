@@ -1,5 +1,5 @@
-import {taskReducer, TasksStateType} from '../../store/reducers/task-reducer';
-import {addTodoList, setTodoLists, todoListReducer, TodoListStateType} from '../../store/reducers/todoList-reducer';
+import {taskReducer, TasksStateType} from '../task-reducer';
+import {addTodoList, setTodoLists, todoListReducer, TodoListStateType} from '../todoList-reducer';
 
 let startTodoListState: TodoListStateType[] = []
 let startTaskState: TasksStateType = {}

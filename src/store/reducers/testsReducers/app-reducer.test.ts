@@ -4,7 +4,7 @@ import {
     setAppError,
     setIsInitialized,
     setRequestStatus
-} from '../../store/reducers/app-reducer';
+} from '../app-reducer';
 
 let startState:initialAppStateType = {
     isInitialized: false,

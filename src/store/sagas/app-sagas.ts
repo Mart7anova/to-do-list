@@ -4,7 +4,6 @@ import {setIsLoggedIn} from "../reducers/auth-reducer";
 import {handleServerNetworkError} from "../../utils/error-utils";
 import {ServerNetworkError} from "../../common/types/ServerNetworkError";
 import {setIsInitialized} from "../reducers/app-reducer";
-import {AxiosResponse} from "axios";
 
 //actions
 export const initializeApp = () => ({type: 'APP/INITIALIZE-APP'})
@@ -12,7 +11,7 @@ export const initializeApp = () => ({type: 'APP/INITIALIZE-APP'})
 //Worker Saga
 export function* initializeAppWS(): any {
     try {
-        const {data}: AxiosResponse<ResponseType<MeType>> = yield call(authAPI.me)
+        const data: ResponseType<MeType> = yield call(authAPI.me)
         if (data.resultCode === 0) {
             yield put(setIsLoggedIn(true))
         }
