@@ -2,7 +2,7 @@ import React from 'react';
 import style from './styles/App.module.scss';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import {TodoLists} from './TodoLists';
-import {PageNotFound} from './PageNotFound';
+import {PageNotFound} from '../common/components/PageNotFound';
 import {Login} from './Login';
 import Container from '@material-ui/core/Container';
 

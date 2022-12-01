@@ -1,7 +1,7 @@
 import {call, put, takeEvery} from "redux-saga/effects";
 import {authAPI, MeType, ResponseType} from "../../api/api";
 import {setIsLoggedIn} from "../reducers/auth-reducer";
-import {handleServerNetworkError} from "../../utils/error-utils";
+import {handleServerNetworkError} from "../../common/utils/error-utils";
 import {ServerNetworkError} from "../../common/types/ServerNetworkError";
 import {setIsInitialized} from "../reducers/app-reducer";
 

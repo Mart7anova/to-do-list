@@ -3,7 +3,7 @@ import {call, put} from "redux-saga/effects";
 import {setRequestStatus} from "../../reducers/app-reducer";
 import {ResponseTasksType, ResponseType, taskAPI, TaskPriorities, TaskStatuses, TaskType} from "../../../api/api";
 import {addTask, ModelType, removeTask, setTasks} from "../../reducers/task-reducer";
-import {handleServerAppError, handleServerNetworkError} from "../../../utils/error-utils";
+import {handleServerAppError, handleServerNetworkError} from "../../../common/utils/error-utils";
 import {ServerNetworkError} from "../../../common/types/ServerNetworkError";
 
 let todoListId: string

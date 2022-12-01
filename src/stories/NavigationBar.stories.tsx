@@ -1,7 +1,7 @@
 import {ComponentMeta} from '@storybook/react';
-import {NavigationBar} from '../main/NavigationBar';
+import {NavigationBar} from '../common/components/NavigationBar';
 import {ReduxStoreProviderDecorator} from './decorators/ReduxStoreProviderDecorator';
-import {ProgressLine} from '../components/ProgressLine';
+import {ProgressLine} from '../common/components/ProgressLine';
 
 export default {
     title: 'NavigationBar',

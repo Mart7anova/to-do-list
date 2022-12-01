@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {NavigationBar} from './NavigationBar';
+import {NavigationBar} from '../common/components/NavigationBar';
 import {useAppSelector} from '../hooks/hooks';
-import {Loading} from '../components/Loading';
-import {ErrorSnackbar} from '../components/ErrorSnackbar';
+import {Loading} from '../common/components/Loading';
+import {ErrorSnackbar} from '../common/components/ErrorSnackbar';
 import style from './styles/App.module.scss'
 import background from '../common/photo/background.jpg'
 import {RoutesApp} from './RoutesApp';

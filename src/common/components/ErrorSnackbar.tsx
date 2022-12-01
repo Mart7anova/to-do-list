@@ -1,8 +1,8 @@
 import React from 'react';
 import {Snackbar} from '@material-ui/core';
-import {useAppDispatch, useAppSelector} from '../hooks/hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import MuiAlert, {AlertProps} from '@material-ui/lab/Alert';
-import {setAppError} from '../store/reducers/app-reducer';
+import {setAppError} from '../../store/reducers/app-reducer';
 
 function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;

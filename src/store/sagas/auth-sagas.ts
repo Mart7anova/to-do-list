@@ -1,7 +1,7 @@
 import {authAPI, LoginParamsType, ResponseType} from "../../api/api";
 import {call, put, takeEvery} from "redux-saga/effects";
 import {setRequestStatus} from "../reducers/app-reducer";
-import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
+import {handleServerAppError, handleServerNetworkError} from "../../common/utils/error-utils";
 import {setIsLoggedIn} from "../reducers/auth-reducer";
 import {ServerNetworkError} from "../../common/types/ServerNetworkError";
 

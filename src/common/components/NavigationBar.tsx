@@ -1,12 +1,12 @@
 import React, {useCallback} from 'react';
 import {AppBar, Button, Toolbar} from '@material-ui/core';
 import style from './styles/NavigationBar.module.scss'
-import {useAppSelector} from '../hooks/hooks';
-import {AddItemForm} from '../components/AddItemForm';
-import {ProgressLine} from '../components/ProgressLine';
-import {createTodoList} from "../store/sagas/todoList-sagas";
+import {useAppSelector} from '../../hooks/hooks';
+import {AddItemForm} from './AddItemForm';
+import {ProgressLine} from './ProgressLine';
+import {createTodoList} from "../../store/sagas/todoList-sagas";
 import {useDispatch} from "react-redux";
-import {logout} from "../store/sagas/auth-sagas";
+import {logout} from "../../store/sagas/auth-sagas";
 
 export const NavigationBar = () => {
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)

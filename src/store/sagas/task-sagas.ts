@@ -1,7 +1,7 @@
 import {call, put, select, takeEvery} from "redux-saga/effects";
 import {setRequestStatus} from "../reducers/app-reducer";
 import {ResponseTasksType, ResponseType, taskAPI, TaskType, UpdateTaskModelType} from "../../api/api";
-import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
+import {handleServerAppError, handleServerNetworkError} from "../../common/utils/error-utils";
 import {ServerNetworkError} from "../../common/types/ServerNetworkError";
 import {addTask, changeTask, ModelType, removeTask, setTasks} from "../reducers/task-reducer";
 import {getTasks} from "../selectors/task-selectors";

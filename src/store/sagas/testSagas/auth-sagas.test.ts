@@ -3,7 +3,7 @@ import {authAPI, LoginParamsType, ResponseType} from "../../../api/api";
 import {call, put} from "redux-saga/effects";
 import {setRequestStatus} from "../../reducers/app-reducer";
 import {setIsLoggedIn} from "../../reducers/auth-reducer";
-import {handleServerAppError, handleServerNetworkError} from "../../../utils/error-utils";
+import {handleServerAppError, handleServerNetworkError} from "../../../common/utils/error-utils";
 import {ServerNetworkError} from "../../../common/types/ServerNetworkError";
 
 let dataForLogin: LoginParamsType

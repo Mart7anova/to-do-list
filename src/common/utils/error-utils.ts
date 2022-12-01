@@ -1,5 +1,5 @@
-import {ResponseType} from '../api/api';
-import {setAppError} from '../store/reducers/app-reducer';
+import {ResponseType} from '../../api/api';
+import {setAppError} from '../../store/reducers/app-reducer';
 
 
 export const handleServerAppError = <D>(data: ResponseType<D>) => {

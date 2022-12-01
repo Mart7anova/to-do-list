@@ -1,7 +1,7 @@
 import {call, put} from "redux-saga/effects";
 import {setRequestStatus} from "../../reducers/app-reducer";
 import {ResponseType, todoListAPI, TodoListType} from "../../../api/api";
-import {handleServerAppError, handleServerNetworkError} from "../../../utils/error-utils";
+import {handleServerAppError, handleServerNetworkError} from "../../../common/utils/error-utils";
 import {ServerNetworkError} from "../../../common/types/ServerNetworkError";
 import {createTodoListWS, deleteTodoListWS, fetchTodoListsWS, updateTodoListWS} from "../todoList-sagas";
 import {addTodoList, changeTodoListTitle, removeTodoList, setTodoLists} from "../../reducers/todoList-reducer";
