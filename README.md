@@ -12,10 +12,10 @@ https://mart7anova.github.io/to-do-list
 - TypeScript
 - React
 - Redux Toolkit
+- Redux-thunk
 - Sagas (to view the implementation, go to the `saga-without-rtk` branch)
-- React-Redux
-- React-Router-dom
-- Redux-Thunk
+- React-redux
+- React-router-dom
 - Material UI
 - Sass
 - Formik
