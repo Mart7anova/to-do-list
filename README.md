@@ -20,6 +20,7 @@ https://mart7anova.github.io/to-do-list
 - Sass
 - Formik
 - Axios
+- Storybook
 
 ## Available Scripts
 
