@@ -71,11 +71,11 @@ export const TodoListItem: FC<PropsType> = memo((props) => {
 
     useEffect(() => {
         dispatch(fetchTasks(todoList.id))
-    }, [dispatch, todoList.id])
+    }, [todoList])
 
 
     return (
-        <div key={todoList.id}>
+        <div>
             <Grid container justifyContent={'space-between'}>
                 <h2 className={style.heading}>
                     {<EditableSpan value={todoList.title} onChange={changeTodoListTitle}/>}

@@ -5,7 +5,7 @@ const {changeTodoListFilter,
     createTodoList,
     deleteTodoList,
     fetchTodoLists,
-    updateTodoListTitle
+    updateTodoListTitle,
 } = todoListsActions
 
 let startState: TodoListStateType[] = []
@@ -55,3 +55,15 @@ test('The filter should to be changed', () => {
     expect(endState.length).toBe(2)
     expect(endState[0].filter).toBe('completed')
 })
+
+// test('The order should to be changed', () => {
+//     const newTodoList: TodoListStateType[] = [
+//         {id: '2', title: 'What to buy', addedDate: '16.08.2022', order: 0, filter: 'all'},
+//         {id: '1', title: 'What to learn', addedDate: '16.08.2022', order: -1, filter: 'all'},
+//     ]
+//
+//     const endState = todoListReducer(startState, changeTodoListOrder(newTodoList))
+//
+//     expect(endState.length).toBe(2)
+//     expect(endState[0].id).toBe('2')
+// })

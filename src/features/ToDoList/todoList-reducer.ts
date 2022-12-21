@@ -1,5 +1,8 @@
 import {todoListAPI} from '../../api/ToDolist-api';
-import {handleServerAppError, handleServerNetworkError} from '../../common/utils/error-utils';
+import {
+    handleServerAppError,
+    handleServerNetworkError
+} from '../../common/utils/error-utils';
 import {appActions} from '../Application';
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AxiosError} from 'axios';
@@ -26,6 +29,7 @@ const createTodoList = createAsyncThunk('todoList/createTodoList',
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
             const res = await todoListAPI.createTodoList(title)
+
             if (res.data.resultCode === 0) {
                 return res.data.data.item
             } else {
@@ -45,6 +49,7 @@ const deleteTodoList = createAsyncThunk('todoList/deleteTodoList',
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
             const res = await todoListAPI.deleteTodoList(id)
+
             if (res.data.resultCode === 0) {
                 return id
             } else {
@@ -63,10 +68,32 @@ const updateTodoListTitle = createAsyncThunk('todoList/updateTodoListTitle',
     async (param: { id: string, title: string }, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
-            const res = await todoListAPI.updateTodoList(param.id, param.title)
+            const {id, title} = param
+            const res = await todoListAPI.updateTodoList(id, title)
+
             if (res.data.resultCode === 0) {
                 return param
             } else {
+                handleServerAppError(res.data, thunkAPI.dispatch)
+                return thunkAPI.rejectWithValue({})
+            }
+        } catch (e) {
+            const error = e as Error | AxiosError<{ error: string }>
+            handleServerNetworkError(error, thunkAPI.dispatch)
+            return thunkAPI.rejectWithValue({})
+        } finally {
+            thunkAPI.dispatch(setAppStatus({status: 'succeeded'}))
+        }
+    })
+
+const reorderTodoList = createAsyncThunk('todoList/reorderTodoList',
+    async (param: { id: string, afterItemId: string }, thunkAPI) => {
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}))
+        try {
+            const {id, afterItemId: putAfterItemId} = param
+            const res = await todoListAPI.reorderTodoList(id, putAfterItemId)
+
+            if (res.data.resultCode !== 0) {
                 handleServerAppError(res.data, thunkAPI.dispatch)
                 return thunkAPI.rejectWithValue({})
             }
@@ -83,7 +110,8 @@ export const asyncActions = {
     fetchTodoLists,
     createTodoList,
     deleteTodoList,
-    updateTodoListTitle
+    updateTodoListTitle,
+    reorderTodoList,
 }
 
 export const slice = createSlice({
@@ -108,7 +136,9 @@ export const slice = createSlice({
         })
         builder.addCase(updateTodoListTitle.fulfilled, (state, action) => {
             const index = state.findIndex(s => s.id === action.payload.id)
-            state[index].title = action.payload.title
+            if(action.payload.title){
+                state[index].title = action.payload.title
+            }
         })
     }
 })
